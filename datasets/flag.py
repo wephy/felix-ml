@@ -6,22 +6,6 @@ import numpy as np
 from torch.utils.data import Dataset, DataLoader
 
 
-flag_location = "//storage/disqs/felix-ML/ProjectSpace/VAE_000/Data"
-
-"""
-This dataset has the following structure.
-
-.
-|-- 1/
-|   |-- input.npy
-|   `-- output.npy
-|-- 2/
-|   |-- input.npy
-|   `-- output.npy
-...
-"""
-
-
 class FLAGDataset(Dataset):
     def __init__(self, data_root):
         self.data = []
@@ -30,7 +14,6 @@ class FLAGDataset(Dataset):
             sample_folder = os.path.join(data_root, sample)
             input_img = os.path.join(sample_folder, "Input.npy")
             output_img = os.path.join(sample_folder, "Output.npy")
-
             self.data.append((input_img, output_img))
 
     def __len__(self):
@@ -45,13 +28,25 @@ class FLAGDataset(Dataset):
         # pytorch tensors should be returned as tensor is the primary data type pytorch works with
         return {
             "input": torch.from_numpy(input_img).float().clone().detach(),
-            "label": torch.from_numpy(output_img).float().clone().detach(),
+            "output": torch.from_numpy(output_img).float().clone().detach(),
         }
 
-
 if __name__ == "__main__":
-    flag_dataset = FLAGDataset(flag_location)
+    """
+    This dataset has the following structure.
 
+    .
+    |-- 1/
+    |   |-- input.npy
+    |   `-- output.npy
+    |-- 2/
+    |   |-- input.npy
+    |   `-- output.npy
+    ...
+    """
+    flag_location = "//storage/disqs/felix-ML/ProjectSpace/VAE_000/Data"
+
+    flag_dataset = FLAGDataset(flag_location)
     flag_dataloader = DataLoader(
         dataset=flag_dataset,  # the dataset instance
         batch_size=64,  # automatic batching
