@@ -17,7 +17,7 @@ author:
   name:           'Joe Webb'
   url:            https://wephy.com
 
-paginate:         5
+paginate:         1
 
 # Custom vars
 version:          0.0.1
