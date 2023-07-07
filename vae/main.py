@@ -23,9 +23,9 @@ epochs = 10
 
 flag_location = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "datasets", "flag"))
 flag_dataset = FLAGDataset(flag_location)
-flag_shrunk = torch.utils.data.Subset(flag_dataset, torch.arange(5000))
+flag_shrunk = torch.utils.data.Subset(flag_dataset, torch.arange(11000))
 
-train_dataset, test_dataset = random_split(flag_shrunk, [4000, 1000])
+train_dataset, test_dataset = random_split(flag_shrunk, [10000, 1000])
 train_loader = DataLoader(
     dataset=train_dataset,  # the dataset instance
     batch_size=batch_size,  # automatic batching
@@ -40,13 +40,6 @@ test_loader = DataLoader(
     shuffle=True,  # shuffles the dataset before every epoch
     num_workers=1,
 )
-
-
-# def one_hot(lattice, class_size):
-#     targets = torch.zeros(lattice.size(0), class_size)
-#     for i, label in enumerate(lattice):
-#         targets[i, label] = 1
-#     return targets.to(device)
 
 
 class CVAE(nn.Module):
