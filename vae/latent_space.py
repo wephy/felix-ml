@@ -31,8 +31,8 @@ torch.manual_seed(seed)
 # ============= Load dataset =============
 flag_location = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "datasets", "flag"))
 flag_dataset = FLAGDataset(flag_location)
-flag_12k = torch.utils.data.Subset(flag_dataset, torch.arange(12000))
-train_dataset, test_dataset = random_split(flag_12k, [10500, 1500])
+flag_12k = torch.utils.data.Subset(flag_dataset, torch.arange(1200))
+train_dataset, test_dataset = random_split(flag_12k, [1050, 150])
 train_loader = DataLoader(
     dataset=train_dataset,  # the dataset instance
     batch_size=batch_size,  # automatic batching
@@ -52,8 +52,6 @@ test_loader = DataLoader(
 model = Model(train_loader, test_loader, latent_size=latent_size, device=device)
 
 if __name__ == "__main__":
-    # logging.basicConfig(filename='results.log')
-
     for epoch in range(1, epochs + 1):
         model.train_model()
         model.test_model()
@@ -63,12 +61,16 @@ if __name__ == "__main__":
                 if i == 1:
                     break
                 data, lattice = data.to(device), lattice.to(device)
-                lattices = lattice[:8]
-                felix_patterns = data[:8]
-                sample = torch.randn(1, latent_size).to(device)
-                prediction_patterns = torch.cat([model.decode(sample, l).cpu() for l in lattices])
-                comparison = torch.cat([lattices.view(-1, 1, 128, 128)[:8],
-                                        felix_patterns.view(-1, 1, 128, 128)[:8],
-                                        prediction_patterns.view(-1, 1, 128, 128)[:8]])
-                save_image(comparison.cpu(),
-                        'results/sample_' + str(model.epoch) + '.png')
+
+                lattice = lattice[0]
+                save_image(lattice.view(1, 1, 128, 128),
+                    'latent_space_results/lattice_' + str(model.epoch) + '.png')
+
+                felix_pattern = data[0]
+                save_image(data.view(1, 1, 128, 128),
+                    'latent_space_results/felix_' + str(model.epoch) + '.png')
+
+                prediction_patterns = torch.cat(
+                    [model.decode(torch.randn(1, latent_size).to(device), lattice).cpu() for _ in range(64)])
+                save_image(prediction_patterns.view(64, 1, 128, 128),
+                    'latent_space_results/predictions_' + str(model.epoch) + '.png')
