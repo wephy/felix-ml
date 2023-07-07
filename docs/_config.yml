@@ -2,8 +2,8 @@
 title:               felix-ml
 tagline:             'felix-ml'
 description:         'A machine learning approach for classifying diffraction patterns, and predicting properties of the associated crystal. Furthermore, to quickly generate these diffraction patterns from crystal parameters.'
-url:                 https://wephy.github.io/
-baseurl:             felix-ml
+url:                 https://wephy.github.io/felix-ml
+baseurl:             docs
 pagination:
   enabled: true
   debug: false
