@@ -1,10 +1,7 @@
 ---
-permalink: robots.txt
-# The robots rules
+layout: null
+sitemap: false
 ---
-
 User-agent: *
-
-Disallow: /norobots/
-
-Sitemap: {{ '/sitemap.xml' | absolute_url }}
+Sitemap: {{ site.url }}/sitemap.xml
+Disallow: /search/
