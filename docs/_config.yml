@@ -1,0 +1,28 @@
+# Setup
+title:               felix-ml
+tagline:             'felix-ml'
+description:         'A machine learning approach for classifying diffraction patterns, and predicting properties of the associated crystal. Furthermore, to quickly generate these diffraction patterns from crystal parameters.'
+url:                 https://wephy.github.io/felix-ml/
+baseurl:             ''
+pagination:
+  enabled: true
+  debug: false
+  collections: 'posts'
+  per_page: 5
+  permalink: '/page/:num/'
+  
+#Plugins
+plugins: [jekyll-paginate-v2]
+
+# About/contact
+author:
+  name:              Joe Webb
+  url:               https://wephy.com
+  email:             joe@wephy.com
+
+# Gems
+plugins:
+  - jekyll-paginate-v2
+
+# Custom vars
+version:             1.1.0
