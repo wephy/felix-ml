@@ -7,15 +7,15 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            felix-ml
-tagline:          'felix-ml'
-description:      'A machine learning approach for classifying diffraction patterns, and predicting properties of the associated crystal. Furthermore, to quickly generate these diffraction patterns from crystal parameters.'
-url:              https://wephy.github.io/felix-ml/
+title:            Hyde
+tagline:          'A Jekyll theme'
+description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:              http://hyde.getpoole.com
 baseurl:          /
 
 author:
-  name:           'Joe Webb'
-  url:            https://wephy.com
+  name:           'Mark Otto'
+  url:            https://twitter.com/mdo
 
 paginate:         5
 
@@ -23,4 +23,4 @@ paginate:         5
 version:          2.1.0
 
 github:
-  repo:           https://github.com/wephy/felix-ml
+  repo:           https://github.com/poole/hyde
