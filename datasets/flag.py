@@ -25,8 +25,8 @@ class FLAGDataset(Dataset):
         output_img = np.clip(np.load(self.data[idx][1]), 0.0, 1.0)
 
         # pytorch tensors should be returned as tensor is the primary data type pytorch works with
-        return [torch.from_numpy(input_img).float().clone().detach(),
-                torch.from_numpy(output_img).float().clone().detach()]
+        return [torch.from_numpy(output_img).float().clone().detach(),
+                torch.from_numpy(input_img).float().clone().detach()]
 
 
 if __name__ == "__main__":
