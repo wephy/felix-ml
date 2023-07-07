@@ -21,15 +21,13 @@ class FLAGDataset(Dataset):
 
     def __getitem__(self, idx):
         # accessing data at particular indexes
-        input_img, output_img = map(
-            np.load, self.data[idx]
-        )  # As these files are in .npy format
+        input_img = np.clip(np.load(self.data[idx][0]), 0.0, 1.0)
+        output_img = np.clip(np.load(self.data[idx][1]), 0.0, 1.0)
 
         # pytorch tensors should be returned as tensor is the primary data type pytorch works with
-        return {
-            "input": torch.from_numpy(input_img).float().clone().detach(),
-            "output": torch.from_numpy(output_img).float().clone().detach(),
-        }
+        return [torch.from_numpy(input_img).float().clone().detach(),
+                torch.from_numpy(output_img).float().clone().detach()]
+
 
 if __name__ == "__main__":
     """
