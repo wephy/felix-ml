@@ -2,10 +2,6 @@
 title: Home
 ---
 
-
-visit the [webpage](https://wephy.github.io/felix-ml/)
-========
-
 **felix-ml** is a machine learning approach for quickly generating diffraction patterns from a given specimen and predicting properties of the specimen when instead given the diffraction pattern.
 
 Built using PyTorch.

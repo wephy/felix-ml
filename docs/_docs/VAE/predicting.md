@@ -8,7 +8,7 @@ order: 2
   <link rel="stylesheet" href="../../../css/syntax.css" />
 </head>
 
-The results below were trained on the dataset intended for CVAE use (see [here](https://wephy.github.io/felix-ml#datasets) for more information on datasets used). The architecture of the CVAE was extremely straightforward consisting of just a couple of linear layers.
+Results below were trained on the dataset intended for CVAE use (see [here](https://wephy.github.io/felix-ml#datasets) for more information on the datasets used). The architecture of the CVAE was extremely straightforward consisting of just a couple of linear layers.
 
 <figure>
     <img src="/felix-ml/assets/images/sample_8.png"
