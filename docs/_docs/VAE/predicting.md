@@ -11,7 +11,7 @@ order: 2
 The results below showcase the CVAE trained and tested on a dataset consisting of 12,000 pairs of a lattice image alongside the corresponding diffraction pattern image generated via Felix.
 
 <figure>
-    <img src="/felix-ml/docs/images/sample_8.png"
+    <img src="/felix-ml/assets/images/sample_8.png"
          alt="predictions">
     <figcaption><b>Figure 1</b>&emsp;Predictions for different lattice structures: (top) Varying lattice structures; (middle) Felix generated diffraction pattern; (bottom) CVAE prediction via decoding the lattice. Taken from epoch 8.</figcaption>
 </figure>
