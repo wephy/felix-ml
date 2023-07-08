@@ -11,13 +11,12 @@ show_full_navigation: true
 logo: /siteicon.png
 description: Product documentation template for Jekyll.
 author:
-  name:
-  email:
-  twitter: # twitter username without the @ symbol
-social:
-  name: Edition Template
-  links:
-    - https://github.com/CloudCannon/edition-jekyll-template
+  name: Joe Webb
+  email: joe@wephy.com
+# social:
+#   name: Edition Template
+#   links:
+#     - https://github.com/CloudCannon/edition-jekyll-template
 
 # -----
 # Build
