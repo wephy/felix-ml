@@ -21,4 +21,5 @@ gem "jekyll-feed", "~> 0.17.0"
 gem "jekyll-prettier", "~> 0.0.0"
 
 gem "kramdown", "~> 2.4"
+
 gem "rouge", "~> 4.1"
