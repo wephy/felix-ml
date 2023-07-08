@@ -33,7 +33,7 @@ for (felix_patterns, lattices) in test_loader:
     # Combine all pieces using cat and save
     comparison = torch.cat(
         [lattices.view(-1, 1, 128, 128)[:8],
-        felix_patterns.view(-1, 1, 128, 128)[:8],
-        prediction_patterns.view(-1, 1, 128, 128)[:8]])
+         felix_patterns.view(-1, 1, 128, 128)[:8],
+         prediction_patterns.view(-1, 1, 128, 128)[:8]])
     save_image(comparison.cpu(), 'results/sample_' + str(model.epoch) + '.png')
 ```
