@@ -59,16 +59,13 @@ if __name__ == "__main__":
         model.test_model()
         
         with torch.no_grad():
-            for i, (data, lattice) in enumerate(test_loader):
-                if i == 1:
-                    break
-                data, lattice = data.to(device), lattice.to(device)
-                lattices = lattice[:8]
-                felix_patterns = data[:8]
-                sample = torch.randn(1, latent_size).to(device)
-                prediction_patterns = torch.cat([model.decode(sample, l).cpu() for l in lattices])
+            for i, (felix_patterns, lattices) in enumerate(test_loader):
+                felix_patterns, lattices = felix_patterns.to(device), lattices.to(device)
+                felix_patterns, lattices, = felix_patterns[:8], lattices[:8]  # Batch size >= 8
+                prediction_patterns = torch.cat([model.decode(torch.randn(1, latent_size).to(device), l).cpu() for l in lattices])
                 comparison = torch.cat([lattices.view(-1, 1, 128, 128)[:8],
                                         felix_patterns.view(-1, 1, 128, 128)[:8],
                                         prediction_patterns.view(-1, 1, 128, 128)[:8]])
-                save_image(comparison.cpu(),
-                        'results/sample_' + str(model.epoch) + '.png')
+                save_image(comparison.cpu(), 'results/sample_' + str(model.epoch) + '.png')
+
+                break
