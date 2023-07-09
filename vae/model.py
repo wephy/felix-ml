@@ -105,7 +105,8 @@ class ResNet(nn.Module):
 
         # decode
         self.fc2 = nn.Linear(self.latent_size + self.class_size, 512)
-        self.fc3 = nn.Linear(512, self.feature_size)
+        self.fc3 = nn.Linear(512, 4096)
+        self.fc4 = nn.Linear(4096, self.feature_size)
 
         self.elu = nn.ELU()
         self.sigmoid = nn.Sigmoid()
@@ -140,10 +141,6 @@ class ResNet(nn.Module):
         
         x = self.avgpool(x)
         x = x.reshape(x.shape[0], -1)
-        # x = x.view(x.size(0), -1)
-        # x = self.fc(x)
-        # inputs = torch.cat([x, c], 1)
-        # h1 = self.elu(self.fc1(inputs))
         z_mu = self.fc11(x)
         z_var = self.fc12(x)
         return z_mu, z_var
@@ -155,8 +152,8 @@ class ResNet(nn.Module):
 
     def decode(self, z, c):
         inputs = torch.cat([z, c.view(-1, self.image_size)], 1)
-        h3 = self.elu(self.fc2(inputs))
-        return self.sigmoid(self.fc3(h3))
+        h3 = self.elu(self.fc3(self.elu(self.fc2(inputs))))
+        return self.sigmoid(self.fc4(h3))
 
     def forward(self, x, c):
         mu, logvar = self.encode(x.view(-1, 1, 128, 128), c.view(-1, 1, 128, 128))

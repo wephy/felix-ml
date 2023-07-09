@@ -66,5 +66,5 @@ if __name__ == "__main__":
                     [transforms.functional.invert(lattices.view(-1, 1, 128, 128)[:8]).to(device),
                      felix_patterns.view(-1, 1, 128, 128)[:8].to(device),
                      prediction_patterns.view(-1, 1, 128, 128)[:8].to(device),])
-                save_image(comparison.to(device), "results/ResNet10_latent1_" + str(model.epoch) + ".png")
+                save_image(comparison.to(device), "results/ResNet10_latent1_improvedDecoder_" + str(model.epoch) + ".png")
                 break
