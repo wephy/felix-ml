@@ -6,18 +6,11 @@ title: felix-ml
 # baseurl: "docs"
 # google_analytics_key:
 show_full_navigation: true
-
-# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 # logo: /siteicon.png
 description: Machine Learning Alternative to Felix.
 author:
   name: Joe Webb
   email: joe@wephy.com
-# social:
-#   name: Edition Template
-#   links:
-#     - https://github.com/CloudCannon/edition-jekyll-template
-
 # -----
 # Build
 

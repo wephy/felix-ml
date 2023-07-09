@@ -1,6 +1,6 @@
 # Dataset
 datasets/flag/
-vae/cached/
+cached/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -25,7 +25,7 @@ if torch.cuda.is_available():
     device = torch.device("cuda")
 else:
     device = torch.device("cpu")
-kwargs = {'num_workers': num_workers, 'pin_memory': True} 
+kwargs = {"num_workers": num_workers, "pin_memory": True}
 torch.manual_seed(seed)
 
 # ============= Load dataset =============
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     for epoch in range(1, epochs + 1):
         model.train_model()
         model.test_model()
-        
+
         with torch.no_grad():
             for i, (data, lattice) in enumerate(test_loader):
                 if i == 1:
@@ -63,14 +63,24 @@ if __name__ == "__main__":
                 data, lattice = data.to(device), lattice.to(device)
 
                 lattice = lattice[0]
-                save_image(lattice.view(1, 1, 128, 128),
-                    'latent_space_results/lattice_' + str(model.epoch) + '.png')
+                save_image(
+                    lattice.view(1, 1, 128, 128),
+                    "latent_space_results/lattice_" + str(model.epoch) + ".png",
+                )
 
                 felix_pattern = data[0]
-                save_image(data.view(1, 1, 128, 128),
-                    'latent_space_results/felix_' + str(model.epoch) + '.png')
+                save_image(
+                    data.view(1, 1, 128, 128),
+                    "latent_space_results/felix_" + str(model.epoch) + ".png",
+                )
 
                 prediction_patterns = torch.cat(
-                    [model.decode(torch.randn(1, latent_size).to(device), lattice).cpu() for _ in range(64)])
-                save_image(prediction_patterns.view(64, 1, 128, 128),
-                    'latent_space_results/predictions_' + str(model.epoch) + '.png')
+                    [
+                        model.decode(torch.randn(1, latent_size).to(device), lattice).cpu()
+                        for _ in range(64)
+                    ]
+                )
+                save_image(
+                    prediction_patterns.view(64, 1, 128, 128),
+                    "latent_space_results/predictions_" + str(model.epoch) + ".png",
+                )

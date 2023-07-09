@@ -24,11 +24,13 @@ class FLAGDataset(Dataset):
         try:
             input_img = np.clip(np.load(self.data[idx][0]), 0.0, 1.0)
             output_img = np.clip(np.load(self.data[idx][1]), 0.0, 1.0)
-        except(IndexError):
+        except (IndexError):
             raise IndexError(f"Attempted to access index: {idx} and received IndexError")
-        
-        return [torch.from_numpy(output_img).float().clone().detach(),
-                torch.from_numpy(input_img).float().clone().detach()]
+
+        return [
+            torch.from_numpy(output_img).float().clone().detach(),
+            torch.from_numpy(input_img).float().clone().detach(),
+        ]
 
 
 if __name__ == "__main__":

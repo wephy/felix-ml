@@ -1,21 +1,19 @@
 import os
 import torch
+from torch import optim
 from torch.utils.data import DataLoader, random_split
-from torch import nn, optim
-from torch.nn import functional as F
-from torchvision import datasets, transforms
+from torchvision import transforms
 from torchvision.utils import save_image
-import matplotlib.pyplot as plt
-import logging
+# import matplotlib.pyplot as plt
+# import logging
 
 import importer  # noqa # pylint: disable=unused-import
 from datasets import FLAGDataset  # noqa # pylint: disable=import-error
-from model import Model, CVAE
+from model import ResNet, Bottleneck
 
 # ============= Hyperparams ==============
 batch_size = 64
-latent_size = 20
-epochs = 10
+epochs = 50
 image_size = 128 * 128
 seed = 1
 num_workers = 2
@@ -25,7 +23,7 @@ if torch.cuda.is_available():
     device = torch.device("cuda")
 else:
     device = torch.device("cpu")
-kwargs = {'num_workers': num_workers, 'pin_memory': True} 
+kwargs = {"num_workers": num_workers, "pin_memory": True}
 torch.manual_seed(seed)
 
 # ============= Load dataset =============
@@ -49,23 +47,24 @@ test_loader = DataLoader(
 )
 
 # =========== Load CVAE model ============
-model = Model(train_loader, test_loader, latent_size=latent_size, device=device)
+model = ResNet(Bottleneck, [1, 1, 1, 1], train_loader, test_loader, device).to(device)
+model.optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 if __name__ == "__main__":
-    # logging.basicConfig(filename='results.log')
-
     for epoch in range(1, epochs + 1):
         model.train_model()
         model.test_model()
-        
+
         with torch.no_grad():
             for i, (felix_patterns, lattices) in enumerate(test_loader):
                 felix_patterns, lattices = felix_patterns.to(device), lattices.to(device)
-                felix_patterns, lattices, = felix_patterns[:8], lattices[:8]  # Batch size >= 8
-                prediction_patterns = torch.cat([model.decode(torch.randn(1, latent_size).to(device), l).cpu() for l in lattices])
-                comparison = torch.cat([lattices.view(-1, 1, 128, 128)[:8],
-                                        felix_patterns.view(-1, 1, 128, 128)[:8],
-                                        prediction_patterns.view(-1, 1, 128, 128)[:8]])
-                save_image(comparison.cpu(), 'results/sample_' + str(model.epoch) + '.png')
-
+                felix_patterns, lattices, = (felix_patterns[:8], lattices[:8])  # Batch size >= 8
+                prediction_patterns = torch.cat(
+                    [model.decode(torch.randn(1, 1).to(device), l).to(device)
+                        for l in lattices])
+                comparison = torch.cat(
+                    [transforms.functional.invert(lattices.view(-1, 1, 128, 128)[:8]).to(device),
+                     felix_patterns.view(-1, 1, 128, 128)[:8].to(device),
+                     prediction_patterns.view(-1, 1, 128, 128)[:8].to(device),])
+                save_image(comparison.to(device), "results/ResNet10_latent1_" + str(model.epoch) + ".png")
                 break
