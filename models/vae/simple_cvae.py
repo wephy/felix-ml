@@ -1,11 +1,11 @@
 import torch
-from models import BaseVAE
+import lightning.pytorch as pl
 from torch import nn
 from torch.nn import functional as F
 from ..types_ import *
 
 
-class SimpleCVAE(BaseVAE):
+class SimpleCVAE(pl.LightningModule):
     def __init__(self,
                  conditional_channels: int,
                  latent_dim: int,
@@ -54,24 +54,16 @@ class SimpleCVAE(BaseVAE):
         mu, log_var = self.encode(x)
         z = self.reparameterize(mu, log_var)
         z = torch.cat([z, y], dim = 1)
-        return  [self.decode(z), input, mu, log_var]
+        return [self.decode(z), input, mu, log_var]
 
-    def loss_function(self,
-                      *args,
-                      **kwargs) -> dict:
+    def loss_function(self, *args, **kwargs) -> dict:
         recons = args[0]
         input = args[1]
         mu = args[2]
         log_var = args[3]
-
-        kld_weight = kwargs['M_N']  # Account for the minibatch samples from the dataset
-        recons_loss =F.mse_loss(recons, input)
-
-        kld_loss = torch.mean(-0.5 * torch.sum(1 + log_var - mu ** 2 - log_var.exp(), dim = 1), dim = 0)
-
-        loss = recons_loss + kld_weight * kld_loss
-        return {'loss': loss, 'Reconstruction_Loss':recons_loss, 'KLD':-kld_loss}
-
+        BCE = F.binary_cross_entropy(recons, input.view(-1, self.image_size), reduction='sum')
+        KLD = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
+        return BCE + KLD
 
     def sample(self,
                num_samples:int,

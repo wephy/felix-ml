@@ -12,7 +12,6 @@ data_params:
 exp_params:
   LR: 0.005
   weight_decay: 0.0
-  scheduler_gamma: 0.95
   kld_weight: 0.00025
   manual_seed: 1
 

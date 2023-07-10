@@ -1,13 +1,8 @@
 import os
 import torch
-from torch import Tensor
-from pathlib import Path
+import lightning.pytorch as pl
 from typing import List, Optional, Sequence, Union, Any, Callable
-from torchvision.datasets.folder import default_loader
-from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
-from torchvision import transforms
-import zipfile
 import numpy as np
 
 
@@ -33,21 +28,7 @@ class LatticeDiffraction(Dataset):
         ]
 
 
-class VAEDataset(LightningDataModule):
-    """
-    PyTorch Lightning data module 
-
-    Args:
-        data_dir: root directory of your dataset.
-        train_batch_size: the batch size to use during training.
-        val_batch_size: the batch size to use during validation.
-        patch_size: the size of the crop to take from the original images.
-        num_workers: the number of parallel workers to create to load data
-            items (see PyTorch's Dataloader documentation for more details).
-        pin_memory: whether prepared items should be loaded into pinned memory
-            or not. This can improve performance on GPUs.
-    """
-
+class FelixDataset(pl.LightningDataModule):
     def __init__(
         self,
         data_path: str,
