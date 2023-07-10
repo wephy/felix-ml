@@ -1,0 +1,28 @@
+model_params:
+  name: 'SimpleCVAE'
+  conditional_channels: 16384
+  latent_dim: 5
+
+data_params:
+  data_path: "datasets/lattice_diffraction/"
+  train_batch_size: 64
+  val_batch_size: 64
+  num_workers: 4
+
+exp_params:
+  LR: 0.005
+  weight_decay: 0.0
+  scheduler_gamma: 0.95
+  kld_weight: 0.00025
+  manual_seed: 1
+
+trainer_params:
+  max_epochs: 10
+
+logging_params:
+  save_dir: "logs/"
+  name: "SimpleCVAE"
+
+environment_params:
+  accelerator: "cpu"
+  SLURM: False

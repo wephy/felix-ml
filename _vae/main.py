@@ -9,14 +9,14 @@ from torchvision.utils import save_image
 
 import importer  # noqa # pylint: disable=unused-import
 from datasets import FLAGDataset  # noqa # pylint: disable=import-error
-from model import ResNet, Bottleneck
+from model import ResNet, SimpleNet, Bottleneck
 
 # ============= Hyperparams ==============
 batch_size = 64
-epochs = 50
+epochs = 10
 image_size = 128 * 128
 seed = 1
-num_workers = 2
+num_workers = 1
 
 # ================ Setup =================
 if torch.cuda.is_available():
@@ -30,7 +30,7 @@ torch.manual_seed(seed)
 flag_location = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "datasets", "flag"))
 flag_dataset = FLAGDataset(flag_location)
 flag_12k = torch.utils.data.Subset(flag_dataset, torch.arange(12000))
-train_dataset, test_dataset = random_split(flag_12k, [10500, 1500])
+train_dataset, test_dataset = random_split(flag_12k, [10000, 2000])
 train_loader = DataLoader(
     dataset=train_dataset,  # the dataset instance
     batch_size=batch_size,  # automatic batching
@@ -47,7 +47,8 @@ test_loader = DataLoader(
 )
 
 # =========== Load CVAE model ============
-model = ResNet(Bottleneck, [1, 1, 1, 1], train_loader, test_loader, device).to(device)
+# model = ResNet(Bottleneck, [1, 1, 1, 1], train_loader, test_loader, device).to(device)
+model = SimpleNet(train_loader, test_loader, device).to(device)
 model.optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 if __name__ == "__main__":
@@ -60,11 +61,11 @@ if __name__ == "__main__":
                 felix_patterns, lattices = felix_patterns.to(device), lattices.to(device)
                 felix_patterns, lattices, = (felix_patterns[:8], lattices[:8])  # Batch size >= 8
                 prediction_patterns = torch.cat(
-                    [model.decode(torch.randn(1, 1).to(device), l).to(device)
+                    [model.decode(torch.randn(1, 2).to(device), l).to(device)
                         for l in lattices])
                 comparison = torch.cat(
                     [transforms.functional.invert(lattices.view(-1, 1, 128, 128)[:8]).to(device),
                      felix_patterns.view(-1, 1, 128, 128)[:8].to(device),
                      prediction_patterns.view(-1, 1, 128, 128)[:8].to(device),])
-                save_image(comparison.to(device), "results/ResNet10_latent1_improvedDecoder_" + str(model.epoch) + ".png")
+                save_image(comparison.to(device), "results/SimpleNet_" + str(model.epoch) + ".png")
                 break

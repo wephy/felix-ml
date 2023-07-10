@@ -114,19 +114,15 @@ class ResNet(nn.Module):
     def _make_layer(self, ResBlock, blocks, planes, stride=1):
         ii_downsample = None
         layers = []
-        
         if stride != 1 or self.in_channels != planes*ResBlock.expansion:
             ii_downsample = nn.Sequential(
                 nn.Conv2d(self.in_channels, planes*ResBlock.expansion, kernel_size=1, stride=stride),
                 nn.BatchNorm2d(planes*ResBlock.expansion)
             )
-            
         layers.append(ResBlock(self.in_channels, planes, i_downsample=ii_downsample, stride=stride))
         self.in_channels = planes*ResBlock.expansion
-        
         for i in range(blocks-1):
             layers.append(ResBlock(self.in_channels, planes))
-            
         return nn.Sequential(*layers)
 
     def encode(self, x, c):
@@ -200,93 +196,91 @@ class ResNet(nn.Module):
                     )
                 )
 
-# class ModelBasic(nn.Module):
-#     def __init__(self, train_loader, test_loader, device):
-#         super().__init__()
-#         self.device = device
-#         self.train_loader = train_loader
-#         self.test_loader = test_loader
-#         self.image_size = 128 * 128
-#         self.feature_size = self.image_size
-#         self.class_size = self.image_size
-#         self.epoch = 0
-#         self.optimizer = None
-#         self.to(device)
 
-#         # params
-#         self.latent_size = 20
+class SimpleNet(nn.Module):
+    def __init__(self, train_loader, test_loader, device):
+        super().__init__()
+        self.device = device
+        self.train_loader = train_loader
+        self.test_loader = test_loader
+        self.image_size = 128 * 128
+        self.feature_size = self.image_size
+        self.class_size = self.image_size
+        self.latent_size = 5
+        self.epoch = 0
+        self.optimizer = None
+        self.to(device)
 
-#         # encode
-#         self.fc1 = nn.Linear(self.feature_size + self.class_size, 400)
-#         self.fc21 = nn.Linear(400, self.latent_size)
-#         self.fc22 = nn.Linear(400, self.latent_size)
+        # encode
+        self.fc1  = nn.Linear(self.feature_size + self.class_size, 512)
+        self.fc21 = nn.Linear(512, self.latent_size)
+        self.fc22 = nn.Linear(512, self.latent_size)
 
-#         # decode
-#         self.fc3 = nn.Linear(self.latent_size + self.class_size, 400)
-#         self.fc4 = nn.Linear(400, self.feature_size)
+        # decode
+        self.fc3 = nn.Linear(self.latent_size + self.class_size, 512)
+        self.fc4 = nn.Linear(512, self.feature_size)
 
-#         self.elu = nn.ELU()
-#         self.sigmoid = nn.Sigmoid()
+        self.elu = nn.ELU()
+        self.sigmoid = nn.Sigmoid()
 
+    def encode(self, x, c):
+        inputs = torch.cat([x, c], 1)
+        h1 = self.elu(self.fc1(inputs))
+        z_mu = self.fc21(h1)
+        z_var = self.fc22(h1)
+        return z_mu, z_var
 
-#     def encode(self, x, c):
-#         inputs = torch.cat([x, c], 1)
-#         h1 = self.elu(self.fc1(inputs))
-#         z_mu = self.fc21(h1)
-#         z_var = self.fc22(h1)
-#         return z_mu, z_var
+    def reparameterize(self, mu, logvar):
+        std = torch.exp(0.5*logvar)
+        eps = torch.randn_like(std)
+        return mu + eps*std
 
-#     def reparameterize(self, mu, logvar):
-#         std = torch.exp(0.5 * logvar)
-#         eps = torch.randn_like(std)
-#         return mu + eps * std
+    def decode(self, z, c):
+        inputs = torch.cat([z, c.view(-1, self.image_size)], 1)
+        h3 = self.elu(self.fc3(inputs))
+        return self.sigmoid(self.fc4(h3))
 
-#     def decode(self, z, c):
-#         inputs = torch.cat([z, c.view(-1, self.image_size)], 1)
-#         h3 = self.elu(self.fc3(inputs))
-#         return self.sigmoid(self.fc4(h3))
+    def forward(self, x, c):
+        mu, logvar = self.encode(x.view(-1, self.image_size), c.view(-1, self.image_size))
+        z = self.reparameterize(mu, logvar)
+        return self.decode(z, c), mu, logvar
 
-#     def forward(self, x, c):
-#         mu, logvar = self.encode(x.view(-1, self.image_size), c.view(-1, self.image_size))
-#         z = self.reparameterize(mu, logvar)
-#         return self.decode(z, c), mu, logvar
+    def loss_function(self, recon_x, x, mu, logvar):
+        BCE = F.binary_cross_entropy(recon_x, x.view(-1, self.image_size).to(self.device), reduction="sum")
+        KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+        return BCE + KLD
 
-#     def loss_function(self, recon_x, x, mu, logvar):
-#         BCE = F.binary_cross_entropy(recon_x, x.view(-1, self.image_size).to(self.device), reduction="sum")
-#         KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-#         return BCE + KLD
+    def test_model(self):
+        self.eval()
+        test_loss = 0
+        with torch.no_grad():
+            for (data, lattice) in self.test_loader:
+                data, lattice = data.to(self.device), lattice.to(self.device)
+                recon_batch, mu, logvar = self(data, lattice)
+                test_loss += (
+                    self.loss_function(recon_batch, data, mu, logvar)
+                )
+        test_loss /= len(self.test_loader.dataset)
+        print("====> Test set loss: {:.4f}".format(test_loss))
 
-#     def test_model(self):
-#         self.eval()
-#         test_loss = 0
-#         with torch.no_grad():
-#             for (data, lattice) in self.test_loader:
-#                 data, lattice = data.to(self.device), lattice.to(self.device)
-#                 recon_batch, mu, logvar = self(data, lattice)
-#                 test_loss += (
-#                     self.loss_function(recon_batch, data, mu, logvar)
-#                 )
-#         test_loss /= len(self.test_loader.dataset)
-#         print("====> Test set loss: {:.4f}".format(test_loss))
-
-#     def train_model(self):
-#         self.epoch += 1
-#         self.train()
-#         train_loss = 0
-#         for batch_idx, (data, lattice) in enumerate(self.train_loader):
-#             recon_batch, mu, logvar = self(data.to(self.device), lattice.to(self.device))
-#             self.optimizer.zero_grad()
-#             loss = self.loss_function(recon_batch, data, mu, logvar)
-#             loss.backward()
-#             train_loss += loss.detach().cpu().numpy()
-#             self.optimizer.step()
-#             if batch_idx % 10 == 0:
-#                 print(
-#                     "Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}".format(
-#                         self.epoch,
-#                         batch_idx * len(data),
-#                         len(self.train_loader.dataset),
-#                         100.0 * batch_idx / len(self.train_loader),
-#                         loss.item() / len(data),
-#                     )
-#                 )
+    def train_model(self):
+        self.epoch += 1
+        self.train()
+        train_loss = 0
+        for batch_idx, (data, lattice) in enumerate(self.train_loader):
+            recon_batch, mu, logvar = self(data.to(self.device), lattice.to(self.device))
+            self.optimizer.zero_grad()
+            loss = self.loss_function(recon_batch, data, mu, logvar)
+            loss.backward()
+            train_loss += loss.detach().cpu().numpy()
+            self.optimizer.step()
+            if batch_idx % 10 == 0:
+                print(
+                    "Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}".format(
+                        self.epoch,
+                        batch_idx * len(data),
+                        len(self.train_loader.dataset),
+                        100.0 * batch_idx / len(self.train_loader),
+                        loss.item() / len(data),
+                    )
+                )

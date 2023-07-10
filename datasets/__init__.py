@@ -1,3 +1,0 @@
-""""""
-
-from .flag import FLAGDataset
