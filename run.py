@@ -20,6 +20,10 @@ def main(config):
     model = models[config['model_params']['name']](**config['model_params'])
     print(f"=======> Model loaded")
 
+
+
+
+
     print(f"=======> Experiment loading...")
     experiment = FelixExperiment(model, config['exp_params'])
     print(f"=======> Experiment loaded")
@@ -27,6 +31,7 @@ def main(config):
     print(f"=======> Trainer loading...")
     trainer = pl.Trainer(
         max_epochs=config['trainer_params']['max_epochs'],
+        accelerator="cpu",
         # accelerator=config['environment_params']['accelerator']
     )
     print(f"=======> Trainer loaded")

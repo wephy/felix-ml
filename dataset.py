@@ -69,5 +69,4 @@ class FelixDataset(pl.LightningDataModule):
             batch_size=144,
             num_workers=self.num_workers,
             shuffle=True,
-            pin_memory=self.pin_memory,
         )

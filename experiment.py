@@ -13,7 +13,7 @@ class FelixExperiment(pl.LightningModule):
 
         self.model = model
         self.params = params
-        self.curr_device = None
+        # self.curr_device = None
         # self.hold_graph = False
         # try:
         #     self.hold_graph = self.params['retain_first_backpass']
@@ -23,27 +23,27 @@ class FelixExperiment(pl.LightningModule):
     def forward(self, input: Tensor, **kwargs) -> Tensor:
         return self.model(input, **kwargs)
 
-    def training_step(self, batch, batch_idx, optimizer_idx = 0):
+    def training_step(self, batch, batch_idx):
         real_img, condition = batch
-        self.curr_device = real_img.device
+        # self.curr_device = real_img.device
 
         results = self.forward(real_img, condition=condition)
         train_loss = self.model.loss_function(*results,
                                               M_N = self.params['kld_weight'], #al_img.shape[0]/ self.num_train_imgs,
-                                              optimizer_idx=optimizer_idx,
+                                            # optimizer_idx = optimizer_idx,
                                               batch_idx = batch_idx)
 
         # self.log_dict({key: val.item() for key, val in train_loss.items()}, sync_dist=True)
         return train_loss
 
-    def validation_step(self, batch, batch_idx, optimizer_idx = 0):
+    def validation_step(self, batch, batch_idx):
         real_img, labels = batch
-        self.curr_device = real_img.device
+        # self.curr_device = real_img.device
 
         results = self.forward(real_img, labels = labels)
         val_loss = self.model.loss_function(*results,
                                             M_N = 1.0, #real_img.shape[0]/ self.num_val_imgs,
-                                            optimizer_idx = optimizer_idx,
+                                            # optimizer_idx = optimizer_idx,
                                             batch_idx = batch_idx)
         return val_loss
         

@@ -67,7 +67,7 @@ class SimpleCVAE(pl.LightningModule):
 
     def sample(self,
                num_samples:int,
-               current_device: int,
+            #    current_device: int,
                **kwargs) -> Tensor:
         """
         Samples from the latent space and return the corresponding
@@ -80,7 +80,7 @@ class SimpleCVAE(pl.LightningModule):
         z = torch.randn(num_samples,
                         self.latent_dim)
 
-        z = z.to(current_device)
+        # z = z.to(current_device)
 
         z = torch.cat([z, y], dim=1)
         samples = self.decode(z)
