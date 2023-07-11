@@ -7,7 +7,7 @@ from torchmetrics import MaxMetric, MeanMetric
 
 
 class CVAELitModule(LightningModule):
-    """Example of LightningModule for MNIST classification.
+    """Example of LightningModule for CVAE classification.
 
     A LightningModule organizes your PyTorch code into 6 sections:
         - Initialization (__init__)

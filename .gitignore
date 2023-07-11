@@ -3,7 +3,6 @@ configs/local/default.yaml
 /logs/
 .env
 /data/CVAE
-/data/MNIST
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
