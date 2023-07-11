@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Search | felix-ml</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Search" />
+<meta name="author" content="Joe Webb" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Machine Learning Alternative to Felix." />
+<meta property="og:description" content="Machine Learning Alternative to Felix." />
+<link rel="canonical" href="http://localhost:4000/search/" />
+<meta property="og:url" content="http://localhost:4000/search/" />
+<meta property="og:site_name" content="felix-ml" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Search" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Joe Webb"},"description":"Machine Learning Alternative to Felix.","headline":"Search","url":"http://localhost:4000/search/"}</script>
+<!-- End Jekyll SEO tag -->
+
+		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="felix-ml" />
+
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic|Open+Sans:400,400italic,600,600italic,700,700italic|Inconsolata:400,700">
+		<link rel="stylesheet" href="/css/main.css">
+
+		
+	</head>
+
+	<body>
+		<header>
+			<h1>
+				felix-ml
+				<button type="button" class="open-nav" id="open-nav"></button>
+			</h1>
+
+			<form action="/search/" method="get">
+				<input type="text" name="q" id="search-input" placeholder="Search" autofocus>
+				<input type="submit" value="Search" style="display: none;">
+			</form>
+
+			<nav class="full-navigation">
+				<ul>
+					<li class="nav-item top-level ">
+						
+						<a href="/">Home</a>
+					</li>
+				</ul>
+
+				<ul>
+					
+					
+						<li class="nav-item top-level ">
+							
+							<a href="/VAE/predicting/">CVAE</a>
+							<ul>
+								
+									<li class="nav-item "><a href="/VAE/predicting/">Predicting Diffraction Patterns</a></li>
+								
+							</ul>
+						</li>
+					
+				</ul>
+
+				<ul>
+					<li class="nav-item top-level ">
+						
+						<a href="/changelog/">About</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<section class="main">
+			<div class="page-header">
+				<h2>felix-ml</h2>
+				<h3>Search</h3>
+			</div>
+			<article class="content">
+				<p><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></p>
+<ul id="search-results"></ul>
+
+<script>
+	window.data = {
+		
+			
+				
+					
+					
+
+					"vae-predicting": {
+						"id": "vae-predicting",
+						"title": "Predicting Diffraction Patterns",
+						"category": "",
+						"url": " /VAE/predicting/",
+						"content": "Results below were trained on the dataset intended for CVAE use (see here for more information on the datasets used). The architecture of the CVAE was extremely straightforward consisting of just a couple of linear layers. Figure 1&emsp;Predictions for different lattice structures: (top) Varying lattice structures; (middle) Felix generated diffraction pattern; (bottom) CVAE prediction via decoding the lattice. The image was generated with the following code: # Get a batch of felix_patterns and lattices from the test set for (felix_patterns, lattices) in test_loader: felix_patterns, lattices = felix_patterns.to(device), lattices.to(device) # Get 8 (&lt;= batch_size) of each for the image felix_patterns, lattices, = felix_patterns[:8], lattices[:8] # Predict the diffraction pattern based off of the lattice prediction_patterns = torch.cat( [model.decode(torch.randn(1, latent_size).to(device), l).cpu() for l in lattices]) # Combine all pieces using cat and save comparison = torch.cat( [lattices.view(-1, 1, 128, 128)[:8], felix_patterns.view(-1, 1, 128, 128)[:8], prediction_patterns.view(-1, 1, 128, 128)[:8]]) save_image(comparison.cpu(), 'results sample_' + str(model.epoch) + '.png')"
+					}
+
+					
+				
+			
+		
+	};
+</script>
+<script src="/scripts/lunr.min.js"></script>
+<script src="/scripts/search.js"></script>
+
+			</article>
+		</section>
+
+		<script>
+			document.getElementById("open-nav").addEventListener("click", function () {
+				document.body.classList.toggle("nav-open");
+			});
+		</script>
+	</body>
+</html>
