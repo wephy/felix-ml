@@ -5,7 +5,7 @@
 defaults:
   - _self_
   - data: cvae.yaml
-  - model: resnet18.yaml
+  - model: convolutional.yaml
   - callbacks: default.yaml
   - logger: csv # set logger here or use command line (e.g. `python train.py logger=tensorboard`)
   - trainer: default.yaml
