@@ -24,7 +24,7 @@ class CVAE(Dataset):
         # lattice = io.imread(os.path.join(self.data_dir, folder, "Input.png"))
         # diffraction = io.imread(os.path.join(self.data_dir, folder, "Output.png"))
         input_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Input.npy")), 0.0, 1.0)
-        output_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Input.npy")), 0.0, 1.0)
+        output_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Output.npy")), 0.0, 1.0)
 
         # if self.transform:
         #     diffraction = self.transform(diffraction).view(128, 128)

@@ -75,3 +75,8 @@ You can override any parameter from command line like this
 ```bash
 python src/train.py trainer.max_epochs=20 data.batch_size=64
 ```
+
+Create a sweep over hyperparameters
+```bash
+python train.py -m data.batch_size=32,64,128 model.lr=0.001,0.0005
+```
