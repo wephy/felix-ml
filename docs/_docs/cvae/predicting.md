@@ -11,9 +11,9 @@ order: 2
 Results below were trained on the dataset intended for CVAE use (see [here](https://wephy.github.io/felix-ml#datasets) for more information on the datasets used). The architecture of the CVAE was extremely straightforward consisting of just a couple of linear layers.
 
 <figure>
-    <img src="/felix-ml/assets/images/sample_8.png"
+    <img src="/felix-ml/assets/images/ResNet10_latent2_2.png"
          alt="predictions">
-    <figcaption><b>Figure 1</b>&emsp;Predictions for different lattice structures: (top) Varying lattice structures; (middle) Felix generated diffraction pattern; (bottom) CVAE prediction via decoding the lattice.</figcaption>
+    <figcaption><b>Figure 1</b>&emsp;Predictions for different lattice structures: (top) Varying lattice structures; (middle) Felix generated diffraction pattern; (bottom) CVAE prediction via decoding the lattice. ResNet10 with 2 latent dimensions (Epoch 2)</figcaption>
 </figure>
 
 The image was generated with the following code:
