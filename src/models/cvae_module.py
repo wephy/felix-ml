@@ -46,7 +46,7 @@ class CVAELitModule(LightningModule):
 
     def loss_function(self, recons, x, mu, logvar):
         # MSE = torch.nn.functional.mse_loss(recons, x)
-        BCE = torch.nn.functional.binary_cross_entropy(recons, x, reduction='sum')
+        BCE = torch.nn.functional.binary_cross_entropy(recons, x.view(recons.size(0), -1), reduction='sum')
         KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         return BCE + KLD
 
@@ -61,7 +61,7 @@ class CVAELitModule(LightningModule):
     def model_step(self, batch: Any):
         x, y = batch
         recons, mu, logvar = self.forward(x, y)
-        loss = self.criterion(recons.view(recons.size(0), -1), x.view(x.size(0), -1), mu, logvar)
+        loss = self.criterion(recons, x, mu, logvar)
         # preds = torch.argmax(logits, dim=1)
         return loss, recons, x
 
@@ -70,7 +70,7 @@ class CVAELitModule(LightningModule):
 
         # update and log metrics
         self.train_loss(loss)
-        self.log("train/loss", self.train_loss, on_step=False, on_epoch=True, prog_bar=True)
+        self.log("train/loss", self.train_loss, on_step=True, on_epoch=True, prog_bar=True)
 
         # return loss or backpropagation will fail
         return loss
@@ -83,7 +83,7 @@ class CVAELitModule(LightningModule):
 
         # update and log metrics
         self.val_loss(loss)
-        self.log("val/loss", self.val_loss, on_step=False, on_epoch=True, prog_bar=True)
+        self.log("val/loss", self.val_loss, on_step=True, on_epoch=True, prog_bar=True)
 
     def on_validation_epoch_end(self):
         pass

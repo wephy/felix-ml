@@ -60,4 +60,4 @@ class SimpleCVAE(nn.Module):
 
         mu, logvar = self.encode(x, c)
         z = self.reparameterize(mu, logvar)
-        return self.decode(z, c).view(batch_size, width, height), mu, logvar
+        return self.decode(z, c), mu, logvar
