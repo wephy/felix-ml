@@ -9,7 +9,7 @@ class SimpleCVAE(nn.Module):
         condition_size: int = 16384,
         latent_size: int = 10,
         encoder_lin1_size: int = 512,
-        decoder_lin2_size: int = 512,
+        decoder_lin1_size: int = 512,
     ):
         super().__init__()
 
@@ -21,9 +21,9 @@ class SimpleCVAE(nn.Module):
         self.fc_var = nn.Linear(encoder_lin1_size, latent_size)
 
         self.decoder = nn.Sequential(
-            nn.Linear(latent_size + condition_size, decoder_lin2_size),
+            nn.Linear(latent_size + condition_size, decoder_lin1_size),
             nn.ELU(),
-            nn.Linear(decoder_lin2_size, input_size),
+            nn.Linear(decoder_lin1_size, input_size),
             nn.Sigmoid(),
         )
 
