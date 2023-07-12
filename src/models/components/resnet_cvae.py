@@ -9,29 +9,38 @@ class SimpleCVAE(nn.Module):
         condition_size: int = 16384,
         latent_size: int = 10,
         encoder_lin1_size: int = 512,
-        decoder_lin2_size: int = 512,
+        encoder_lin2_size: int = 512,
+        encoder_lin3_size: int = 512,
+        decoder_lin1_size: int = 512,
     ):
         super().__init__()
 
         self.encoder = nn.Sequential(
             nn.Linear(input_size + condition_size, encoder_lin1_size),
-            nn.ELU(),
+            nn.BatchNorm1d(encoder_lin1_size),
+            nn.ReLU(),
+            nn.Linear(encoder_lin1_size, encoder_lin2_size),
+            nn.BatchNorm1d(encoder_lin2_size),
+            nn.ReLU(),
+            nn.Linear(encoder_lin2_size, encoder_lin3_size),
+            nn.BatchNorm1d(encoder_lin3_size),
+            nn.ReLU(),
         )
-        self.fc_mu = nn.Linear(encoder_lin1_size, latent_size)
-        self.fc_var = nn.Linear(encoder_lin1_size, latent_size)
+        self.fc_mu = nn.Linear(encoder_lin3_size, latent_size)
+        self.fc_var = nn.Linear(encoder_lin3_size, latent_size)
 
         self.decoder = nn.Sequential(
-            nn.Linear(latent_size + condition_size, decoder_lin2_size),
+            nn.Linear(latent_size + condition_size, decoder_lin1_size),
             nn.ELU(),
-            nn.Linear(decoder_lin2_size, input_size),
+            nn.Linear(decoder_lin1_size, input_size),
             nn.Sigmoid(),
         )
 
     def encode(self, x, c):
         inputs = torch.cat([x, c], 1)
         h2 = self.encoder(inputs)
-        z_mu = self.fc_mu(h2)
-        z_var = self.fc_var(h2)
+        z_mu = self.fc21(h2)
+        z_var = self.fc22(h2)
         return z_mu, z_var
 
     def decode(self, z, c):

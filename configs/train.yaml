@@ -5,7 +5,7 @@
 defaults:
   - _self_
   - data: cvae.yaml
-  - model: cvae.yaml
+  - model: simple_cvae.yaml
   - callbacks: default.yaml
   - logger: null # set logger here or use command line (e.g. `python train.py logger=tensorboard`)
   - trainer: default.yaml

@@ -18,7 +18,5 @@ net:
   input_size: 16384
   condition_size: 16384
   latent_size: 5
-  lin1_size: 512
-  lin2_size: 512
-  # lin3_size: 256
-  # lin4_size: 512
+  encoder_lin1_size: 512
+  decoder_lin1_size: 512

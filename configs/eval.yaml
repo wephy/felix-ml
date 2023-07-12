@@ -3,7 +3,7 @@
 defaults:
   - _self_
   - data: cvae.yaml # choose datamodule with `test_dataloader()` for evaluation
-  - model: cvae.yaml
+  - model: simple_cvae.yaml
   - logger: null
   - trainer: default.yaml
   - paths: default.yaml
