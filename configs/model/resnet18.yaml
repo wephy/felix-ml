@@ -14,11 +14,6 @@ scheduler:
   patience: 10
 
 net:
-  _target_: src.models.components.simple_cvae.SimpleCVAE
-  input_size: 16384
-  condition_size: 16384
-  latent_size: 5
-  encoder_lin1_size: 512
-  encoder_lin2_size: 512
-  encoder_lin3_size: 512
-  decoder_lin1_size: 512
+  _target_: src.models.components.resnet.ResNet
+  layers: [2, 2, 2, 2]
+  latent_dims: 10
