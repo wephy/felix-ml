@@ -13,7 +13,7 @@ log_cli = "True"
 markers = [
   "slow: slow tests",
 ]
-minversion = "6.0"
+minversion = "0.1"
 testpaths = "tests/"
 
 [tool.coverage.report]

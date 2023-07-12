@@ -5,10 +5,10 @@ from setuptools import find_packages, setup
 setup(
     name="src",
     version="0.0.1",
-    description="Describe Your Cool Project",
-    author="",
-    author_email="",
-    url="https://github.com/user/project",
+    description="Felix-ML is able to predict and analyse LACBED diffraction patterns for defining crystal structures.",
+    author="Joe Webb",
+    author_email="joe@wephy.com",
+    url="https://github.com/wephy/felix-ml",
     install_requires=["lightning", "hydra-core"],
     packages=find_packages(),
     # use this to customize global commands available in the terminal after installing the package

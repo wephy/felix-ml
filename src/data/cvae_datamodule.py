@@ -2,10 +2,11 @@ from typing import Any, Dict, Optional, Tuple
 
 import os
 import torch
-from skimage import io
+# from skimage import io
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision.transforms import transforms
+import numpy as np
 
 
 class CVAE(Dataset):
@@ -20,13 +21,16 @@ class CVAE(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
         folder = os.listdir(self.data_dir)[idx]
-        x = io.imread(os.path.join(self.data_dir, folder, "Input.png"))
-        c = io.imread(os.path.join(self.data_dir, folder, "Output.png"))
+        # lattice = io.imread(os.path.join(self.data_dir, folder, "Input.png"))
+        # diffraction = io.imread(os.path.join(self.data_dir, folder, "Output.png"))
+        input_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Input.npy")), 0.0, 1.0)
+        output_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Input.npy")), 0.0, 1.0)
 
-        if self.transform:
-            x, c = self.transform(x), self.transform(c)
+        # if self.transform:
+        #     diffraction = self.transform(diffraction).view(128, 128)
+        #     lattice = self.transform(lattice).view(128, 128)
 
-        return x, c
+        return torch.from_numpy(output_img).float().clone().detach(), torch.from_numpy(input_img).float().clone().detach()
 
 
 class CVAEDataModule(LightningDataModule):
@@ -71,7 +75,7 @@ class CVAEDataModule(LightningDataModule):
 
         # data transformations
         self.transforms = transforms.Compose(
-            [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+            [transforms.ToTensor(), ]
         )
 
         self.data_train: Optional[Dataset] = None

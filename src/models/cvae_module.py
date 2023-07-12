@@ -3,7 +3,7 @@ from typing import Any
 import torch
 from lightning import LightningModule
 from torchmetrics import MaxMetric, MeanMetric
-# from torchmetrics.classification.accuracy import Accuracy
+from torchvision.utils import save_image
 
 
 class CVAELitModule(LightningModule):
@@ -34,22 +34,21 @@ class CVAELitModule(LightningModule):
         self.save_hyperparameters(logger=False)
 
         self.net = net
+        self.epoch = 0
 
         # loss function
-        self.criterion = torch.nn.CrossEntropyLoss()
-
-        # metric objects for calculating and averaging accuracy across batches
-        # self.train_acc = Accuracy(task="multiclass", num_classes=10)
-        # self.val_acc = Accuracy(task="multiclass", num_classes=10)
-        # self.test_acc = Accuracy(task="multiclass", num_classes=10)
+        self.criterion = self.loss_function
 
         # for averaging loss across batches
         self.train_loss = MeanMetric()
         self.val_loss = MeanMetric()
         self.test_loss = MeanMetric()
 
-        # for tracking best so far validation accuracy
-        self.val_acc_best = MaxMetric()
+    def loss_function(self, recons, x, mu, logvar):
+        # MSE = torch.nn.functional.mse_loss(recons, x)
+        BCE = torch.nn.functional.binary_cross_entropy(recons, x, reduction='sum')
+        KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+        return BCE + KLD
 
     def forward(self, x: torch.Tensor, y: torch.Tensor):
         return self.net(x, y)
@@ -58,56 +57,43 @@ class CVAELitModule(LightningModule):
         # by default lightning executes validation step sanity checks before training starts,
         # so it's worth to make sure validation metrics don't store results from these checks
         self.val_loss.reset()
-        # self.val_acc.reset()
-        # self.val_acc_best.reset()
 
     def model_step(self, batch: Any):
         x, y = batch
-        logits, mu, logvar = self.forward(x, y)
-        loss = self.criterion(logits.view(x.size(0), -1), x.view(x.size(0), -1))
-        preds = torch.argmax(logits, dim=1)
-        return loss, preds, y
+        recons, mu, logvar = self.forward(x, y)
+        loss = self.criterion(recons.view(recons.size(0), -1), x.view(x.size(0), -1), mu, logvar)
+        # preds = torch.argmax(logits, dim=1)
+        return loss, recons, x
 
     def training_step(self, batch: Any, batch_idx: int):
-        loss, preds, targets = self.model_step(batch)
+        loss, recons, x = self.model_step(batch)
 
         # update and log metrics
         self.train_loss(loss)
-        # self.train_acc(preds, targets)
         self.log("train/loss", self.train_loss, on_step=False, on_epoch=True, prog_bar=True)
-        # self.log("train/acc", self.train_acc, on_step=False, on_epoch=True, prog_bar=True)
 
         # return loss or backpropagation will fail
         return loss
 
     def on_train_epoch_end(self):
-        pass
+        self.epoch += 1
 
     def validation_step(self, batch: Any, batch_idx: int):
-        loss, preds, targets = self.model_step(batch)
+        loss, recons, _ = self.model_step(batch)
 
         # update and log metrics
         self.val_loss(loss)
-        # self.val_acc(preds, targets)
         self.log("val/loss", self.val_loss, on_step=False, on_epoch=True, prog_bar=True)
-        # self.log("val/acc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
 
     def on_validation_epoch_end(self):
         pass
-        # acc = self.val_acc.compute()  # get current val acc
-        # self.val_acc_best(acc)  # update best so far val acc
-        # log `val_acc_best` as a value through `.compute()` method, instead of as a metric object
-        # otherwise metric would be reset by lightning after each epoch
-        # self.log("val/acc_best", self.val_acc_best.compute(), sync_dist=True, prog_bar=True)
 
     def test_step(self, batch: Any, batch_idx: int):
-        loss, preds, targets = self.model_step(batch)
+        loss, recons, _ = self.model_step(batch)
 
         # update and log metrics
         self.test_loss(loss)
-        # self.test_acc(preds, targets)
         self.log("test/loss", self.test_loss, on_step=False, on_epoch=True, prog_bar=True)
-        # self.log("test/acc", self.test_acc, on_step=False, on_epoch=True, prog_bar=True)
 
     def on_test_epoch_end(self):
         pass
