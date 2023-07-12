@@ -2,10 +2,7 @@
 title: Home
 ---
 
-**felix-ml** is a machine learning approach for quickly generating diffraction patterns from a given specimen and predicting properties of the specimen when instead given the diffraction pattern.
-
-Built using PyTorch.
-
+**felix-ml** is a machine learning approach to predict and analyse LACBED diffraction patterns for defining crystal structures. 
 
 ### datasets
 
