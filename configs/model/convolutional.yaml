@@ -15,4 +15,4 @@ scheduler:
 
 net:
   _target_: src.models.components.convolutional.Convolutional
-  latent_dims: 10
+  latent_dims: 20

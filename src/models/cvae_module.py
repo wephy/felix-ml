@@ -46,7 +46,7 @@ class CVAELitModule(LightningModule):
 
     def loss_function(self, recons, x, mu, logvar):
         # MSE = torch.nn.functional.mse_loss(recons, x)
-        BCE = torch.nn.functional.binary_cross_entropy(recons, x.view(recons.size(0), -1), reduction='sum')
+        BCE = torch.nn.functional.binary_cross_entropy(recons, x.view(recons.size(0), -1))
         KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         return BCE + KLD
 
