@@ -34,7 +34,6 @@ class CVAELitModule(LightningModule):
         self.save_hyperparameters(logger=False)
 
         self.net = net
-        self.epoch = 0
 
         # loss function
         self.criterion = self.loss_function
@@ -76,7 +75,7 @@ class CVAELitModule(LightningModule):
         return loss
 
     def on_train_epoch_end(self):
-        self.epoch += 1
+        pass
 
     def validation_step(self, batch: Any, batch_idx: int):
         loss, recons, _ = self.model_step(batch)

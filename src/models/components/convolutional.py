@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 
 class Convolutional(nn.Module):
-    def __init__(self, latent_dims=10):
+    def __init__(self, latent_dims=25):
         super(Convolutional, self).__init__()
 
         self.input_encoder = nn.Sequential(
