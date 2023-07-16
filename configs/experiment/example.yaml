@@ -5,14 +5,14 @@
 
 defaults:
   - override /data: cvae.yaml
-  - override /model: simple_cvae.yaml
+  - override /model: convolutional.yaml
   - override /callbacks: default.yaml
   - override /trainer: default.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["cvae", "simple_cvae"]
+tags: ["cvae", "convolutional"]
 
 seed: 12345
 

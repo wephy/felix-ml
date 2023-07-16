@@ -14,9 +14,9 @@
 
 </div>
 
-## Description
+## Quick Start
 
-Felix-ML is able to predict and analyse LACBED diffraction patterns for defining crystal structures.
+Read "Installation" from
 
 ## Installation
 
