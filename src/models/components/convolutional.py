@@ -7,6 +7,8 @@ class Convolutional(nn.Module):
     def __init__(self, latent_dims=25):
         super(Convolutional, self).__init__()
 
+        self.latent_dims = latent_dims
+
         self.input_encoder = nn.Sequential(
             nn.Conv2d(1, 2, kernel_size=3, stride=2, padding=1, bias=False),
             nn.ReLU(),
@@ -19,13 +21,13 @@ class Convolutional(nn.Module):
         )
 
         self.condition_encoder = nn.Sequential(
-            nn.Conv2d(1, 2, kernel_size=3, stride=2, padding=1, bias=False),
-            nn.ReLU(),
-            nn.Conv2d(2, 4, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(1, 4, kernel_size=3, stride=2, padding=1, bias=False),
             nn.ReLU(),
             nn.Conv2d(4, 8, kernel_size=3, stride=2, padding=1, bias=False),
             nn.ReLU(),
             nn.Conv2d(8, 16, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.ReLU(),
+            nn.Conv2d(16, 32, kernel_size=3, stride=2, padding=1, bias=False),
             nn.ReLU(),
         )
 

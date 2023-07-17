@@ -1,4 +1,4 @@
-_target_: src.models.cvae_module.CVAELitModule
+_target_: src.models.vae000_module.VAELitModule
 
 optimizer:
   _target_: torch.optim.Adam
@@ -15,4 +15,4 @@ scheduler:
 
 net:
   _target_: src.models.components.convolutional.Convolutional
-  latent_dims: 20
+  latent_dims: 25

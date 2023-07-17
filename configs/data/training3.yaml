@@ -1,0 +1,6 @@
+_target_: src.data.training3_datamodule.VAEDataModule
+data_dir: /storage/disqs/felix-ML/DataSpace/RawData/training3/4001to5000
+batch_size: 16
+train_val_test_split: [800, 100, 100]
+num_workers: 8
+pin_memory: False

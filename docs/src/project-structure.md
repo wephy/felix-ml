@@ -47,6 +47,5 @@ The structure of this project may seem confusing at first, so this page will hop
 ├── Makefile                  <- Makefile with commands like `make train` or `make test`
 ├── pyproject.toml            <- Configuration options for testing and linting
 ├── README.md                 <- README file
-├── requirements.txt          <- File for installing python dependencies
-└── setup.py                  <- File for installing project as a package
+└── requirements.txt          <- File for installing python dependencies
 ```

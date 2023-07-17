@@ -1,0 +1,6 @@
+_target_: src.data.vae000_datamodule.VAEDataModule
+data_dir: /storage/disqs/felix-ML/ProjectSpace/VAE_000/Data
+batch_size: 16
+train_val_test_split: [11_286, 500, 500]
+num_workers: 8
+pin_memory: False

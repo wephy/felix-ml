@@ -1,6 +1,6 @@
 # Felix ML
 
-*by Joe Webb, with thanks to Rudo Römer and Richard Beanland*
+*by Joe Webb*
 
 Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.
 
@@ -10,7 +10,6 @@ Felix ML is a machine learning approach to diffraction patterns. It serves as a 
 > - 🐉 [Hydra][hydra] \
 > - 🚀 [Lightning-Hydra-Template][template] \
 > - 📓 [mdBook][mdbook] \
-
 
 
 [diffraction]: https://en.wikipedia.org/wiki/Diffraction
