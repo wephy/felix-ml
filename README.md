@@ -20,38 +20,6 @@ Read "Installation" from
 
 ## Installation
 
-#### Pip
-
-```bash
-# clone project
-git clone https://github.com/wephy/felix-ml
-cd felix-ml
-
-# [OPTIONAL] create conda environment
-conda create -n myenv python=3.9
-conda activate myenv
-
-# install pytorch according to instructions
-# https://pytorch.org/get-started/
-
-# install requirements
-pip install -r requirements.txt
-```
-
-#### Conda
-
-```bash
-# clone project
-git clone https://github.com/wephy/felix-ml
-cd felix-ml
-
-# create conda environment and install dependencies
-conda env create -f environment.yaml -n myenv
-
-# activate conda environment
-conda activate myenv
-```
-
 ## How to run
 
 Train model with default configuration

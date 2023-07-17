@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Felix ML</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configs.html"><strong aria-hidden="true">1.2.</strong> Configs</a></li><li class="chapter-item expanded "><a href="customising-your-dataset.html"><strong aria-hidden="true">1.3.</strong> Customising your dataset</a></li><li class="chapter-item expanded "><a href="creating-models.html"><strong aria-hidden="true">1.4.</strong> Creating models</a></li><li class="chapter-item expanded "><a href="the-trainer.html"><strong aria-hidden="true">1.5.</strong> The trainer</a></li></ol></li><li class="chapter-item expanded "><a href="how-to-run.html"><strong aria-hidden="true">2.</strong> How to run</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="training-your-model.html"><strong aria-hidden="true">2.1.</strong> Training your model</a></li><li class="chapter-item expanded "><a href="evaluating-your-model.html"><strong aria-hidden="true">2.2.</strong> Evalutating your model</a></li><li class="chapter-item expanded "><a href="running-experiments.html"><strong aria-hidden="true">2.3.</strong> Running experiments</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">2.4.</strong> Logging</a></li></ol></li><li class="chapter-item expanded "><a href="results.html"><strong aria-hidden="true">3.</strong> Results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="can-machine-learning-do-it.html"><strong aria-hidden="true">3.1.</strong> Can machine learning do it?</a></li><li class="chapter-item expanded "><a href="datasets.html"><strong aria-hidden="true">3.2.</strong> My datasets</a></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">4.</strong> References</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Felix ML</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li><li class="chapter-item expanded "><a href="configs.html"><strong aria-hidden="true">1.3.</strong> Configs</a></li><li class="chapter-item expanded "><a href="customising-your-dataset.html"><strong aria-hidden="true">1.4.</strong> Customising your dataset</a></li><li class="chapter-item expanded "><a href="creating-models.html"><strong aria-hidden="true">1.5.</strong> Creating models</a></li><li class="chapter-item expanded "><a href="the-trainer.html"><strong aria-hidden="true">1.6.</strong> The trainer</a></li></ol></li><li class="chapter-item expanded "><a href="how-to-run.html"><strong aria-hidden="true">2.</strong> How to run</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="training-your-model.html"><strong aria-hidden="true">2.1.</strong> Training your model</a></li><li class="chapter-item expanded "><a href="evaluating-your-model.html"><strong aria-hidden="true">2.2.</strong> Evalutating your model</a></li><li class="chapter-item expanded "><a href="running-experiments.html"><strong aria-hidden="true">2.3.</strong> Running experiments</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">2.4.</strong> Logging</a></li></ol></li><li class="chapter-item expanded "><a href="research.html"><strong aria-hidden="true">3.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="can-machine-learning-do-it.html"><strong aria-hidden="true">3.1.</strong> Can machine learning do it?</a></li><li class="chapter-item expanded "><a href="datasets.html"><strong aria-hidden="true">3.2.</strong> My datasets</a></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">4.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contact.html">Contact</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,10 +171,164 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="felix-ml"><a class="header" href="#felix-ml">Felix ML</a></h1>
+<p><em>by Joe Webb, with thanks to Rudo Römer and Richard Beanland</em></p>
+<p>Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.</p>
+<blockquote>
+<p>Felix ML owes itself to many wonderful existing projects and tools:</p>
+<ul>
+<li>🔥 <a href="https://pytorch.org">PyTorch</a> </li>
+<li>⚡ <a href="https://lightning.ai">Lightning</a> </li>
+<li>🐉 <a href="https://hydra.cc">Hydra</a> </li>
+<li>🚀 <a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a> </li>
+<li>📓 <a href="https://rust-lang.github.io/mdBook/">mdBook</a> </li>
+</ul>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Welcome to <em>Felix ML</em>. </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
+<p>This section intends to teach you the ins-and-outs of the project, detailing how all parts work individually and together.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Before you can play around with Felix ML, you'll need to make sure all the package requirements are met, some of which specific versions might be needed.</p>
+<blockquote>
+<p>I recommend using <a href="https://www.anaconda.com/download">Anaconda</a> to manage an environment for this, and once Anaconda is installed, you have two options: <code>pip</code> or <code>conda</code>. You may prefer to use conda as pip installs packages in a loop, without ensuring dependencies across all packages are fulfilled simultaneously, but conda achieves proper dependency control across all packages; furthermore, conda allows for installing packages without requiring certain compilers or libraries to be available in the system, since it installs precompiled binaries.</p>
+</blockquote>
+<ol>
+<li>
+<p>Install <a href="https://www.anaconda.com/download">Anaconda</a></p>
+</li>
+<li>
+<p>If you machine has a <a href="https://developer.nvidia.com/cuda-gpus">CUDA-enabled GPU</a>, install <a href="https://developer.nvidia.com/cuda-downloads">CUDA</a></p>
+</li>
+<li>
+<p>Choose one of the following methods:</p>
+<h4 id="pip"><a class="header" href="#pip">Pip</a></h4>
+<pre><code class="language-bash"># clone project
+git clone https://github.com/wephy/felix-ml
+cd felix-ml
+
+# [OPTIONAL] create conda environment
+conda create -n felix-ml python=3.9
+conda activate felix-ml
+
+# install pytorch according to instructions
+# https://pytorch.org/get-started/
+
+# install requirements
+pip install -r requirements.txt
+</code></pre>
+<h4 id="conda"><a class="header" href="#conda">Conda</a></h4>
+<pre><code class="language-bash"># clone project
+git clone https://github.com/wephy/felix-ml
+cd felix-ml
+
+# create conda environment and install dependencies
+conda env create -f environment.yaml -n myenv
+
+# activate conda environment
+conda activate myenv
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h1>
+<p>The structure of this project may seem confusing at first, so this page will hopefully explain all of that for you.</p>
+<pre><code class="language-txt">├── .github                &lt;- Github Actions workflows
+│
+├── configs                &lt;- Hydra configs
+│   ├── callbacks             &lt;- Callbacks configs
+│   ├── data                  &lt;- Data configs
+│   ├── debug                 &lt;- Debugging configs
+│   ├── experiment            &lt;- Experiment configs
+│   ├── extras                &lt;- Extra utilities configs
+│   ├── hparams_search        &lt;- Hyperparameter search configs
+│   ├── hydra                 &lt;- Hydra configs
+│   ├── local                 &lt;- Local configs
+│   ├── logger                &lt;- Logger configs
+│   ├── model                 &lt;- Model configs
+│   ├── paths                 &lt;- Project paths configs
+│   ├── trainer               &lt;- Trainer configs
+│   ├── eval.yaml             &lt;- Main config for evaluation
+│   └── train.yaml            &lt;- Main config for training
+│
+├── data                   &lt;- Project data
+│
+├── docs                   &lt;- Website files
+│
+├── logs                   &lt;- Logs generated by hydra and lightning loggers
+│
+├── notebooks              &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│                             the creator's initials, and a short `-` delimited description,
+│                             e.g. `1.0-jqp-initial-data-exploration.ipynb`.
+│
+├── scripts                &lt;- Shell scripts
+│
+├── src                    &lt;- Source code
+│   ├── data                  &lt;- Data scripts
+│   ├── models                &lt;- Model scripts
+│   ├── utils                 &lt;- Utility scripts
+│   ├── eval.py               &lt;- Run evaluation
+│   └── train.py              &lt;- Run training
+│
+├── .gitignore                &lt;- List of files ignored by git
+├── .pre-commit-config.yaml   &lt;- Configuration of pre-commit hooks for code formatting
+├── .project-root             &lt;- File for inferring the position of project root directory
+├── environment.yaml          &lt;- File for installing conda environment
+├── Makefile                  &lt;- Makefile with commands like `make train` or `make test`
+├── pyproject.toml            &lt;- Configuration options for testing and linting
+├── README.md                 &lt;- README file
+├── requirements.txt          &lt;- File for installing python dependencies
+└── setup.py                  &lt;- File for installing project as a package
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="configs"><a class="header" href="#configs">Configs</a></h1>
+<p>With Hydra, we can manage everything with just a set of config files, which were outlined in the <a href="project-structure.html">project structure</a>. These have been seperated into categories, containing two key files <code>eval.yaml</code> and <code>train.yaml</code>, and the following sets (which you may want more than one configuration for):</p>
+<ul>
+<li><code>callbacks</code></li>
+<li><code>data</code></li>
+<li><code>debug</code></li>
+<li><code>experiment</code></li>
+<li><code>extras</code></li>
+<li><code>hparams_search</code></li>
+<li><code>hydra</code></li>
+<li><code>local</code></li>
+<li><code>logger</code></li>
+<li><code>model</code></li>
+<li><code>paths</code></li>
+<li><code>trainer</code></li>
+</ul>
+<h2 id="trainyaml-and-evalyaml"><a class="header" href="#trainyaml-and-evalyaml"><code>train.yaml</code> and <code>eval.yaml</code></a></h2>
+<p>Whenever you train or evaluate the model, e.g. via <code>make train</code> (or similarly <code>python src/train.py</code>), you use a selection of configs. This all happens in the <code>train.yaml</code> file. Here is a part of it:</p>
+<pre><code class="language-yaml">defaults:
+  - _self_
+  - data: cvae.yaml
+  - model: convolutional.yaml
+  - callbacks: default.yaml
+  - logger: csv
+  - trainer: default.yaml
+  - paths: default.yaml
+  - extras: default.yaml
+  - hydra: default.yaml
+</code></pre>
+<p>The <code>data</code> parameter points to a yaml file in the <code>configs/data/</code> folder, which in this case is <code>cvae.yaml</code>, a config file for the dataset I primarily work with. The next parameter is <code>model</code>, which similarly directs to a yaml file located in <code>configs/model/</code> associated with a particular machine learning model. As you can see, most of them are set to <code>default.yaml</code>, which is located in each of their respective folders, and includes standard defaults. New configs can be made and if selected here, in <code>train.yaml</code>, they will be used when the model is next trained. <code>eval.yaml</code> works very similarly.</p>
+<p>Beyond selecting these yaml files, there are some extra options which can be changed in the two files, which are all hopefully self-explanatory.</p>
+<h2 id="callbacks"><a class="header" href="#callbacks">Callbacks</a></h2>
+<p>Callbacks are objects that can customize the behavior of the training loop in the PyTorch Trainer, and can be used for things such as as model checkpointing, early stopping, etc. The setup is designed to use callbacks that are <a href="https://lightning.ai/docs/pytorch/latest/extensions/callbacks.html#built-in-callbacks">built-in to Lightning</a>.</p>
+<p>For example, in <code>model_summary.yaml</code>, we use the <code>RichModelSummary</code> object from Lightning.</p>
+<pre><code class="language-yaml">model_summary:
+  _target_: lightning.pytorch.callbacks.RichModelSummary
+  max_depth: 1 # the maximum depth of layer nesting that the summary will include
+</code></pre>
+<p>One can then use this callback as follows:</p>
+<pre><code class="language-bash">python train.py callbacks=model_summary
+</code></pre>
+<p>Or include it in a selection of callbacks, as done in <code>default.yaml</code>, which can then be used to utilise all of them. Ideally configs which contain a <code>default.yaml</code> should be chosen in <code>train.yaml</code></p>
+<h2 id="data"><a class="header" href="#data">Data</a></h2>
+<p>Each yaml file here is used for the loading of a dataset, and includes all the imporant key words one requires for the use of a dataset.</p>
+<p>This is the default <code>CVAE.yaml</code>
+<em>target</em>: src.data.cvae_datamodule.CVAEDataModule
+data_dir: ${paths.data_dir}/CVAE
+batch_size: 16
+train_val_test_split: [10_205, 1_000, 1_000]
+num_workers: 8
+pin_memory: False</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="customising-your-dataset"><a class="header" href="#customising-your-dataset">Customising your dataset</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-models"><a class="header" href="#creating-models">Creating models</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-trainer"><a class="header" href="#the-trainer">The trainer</a></h1>
@@ -183,10 +337,18 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="evalutating-your-model"><a class="header" href="#evalutating-your-model">Evalutating your model</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="running-experiments"><a class="header" href="#running-experiments">Running experiments</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="logging"><a class="header" href="#logging">Logging</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="results"><a class="header" href="#results">Results</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="research"><a class="header" href="#research">Research</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="can-machine-learning-do-it"><a class="header" href="#can-machine-learning-do-it">Can machine learning do it?</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="datasets"><a class="header" href="#datasets">Datasets</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contact"><a class="header" href="#contact">Contact</a></h1>
+<p>Joe Webb <br />
+Student. BSc Mathematics and Physics</p>
+<p>Disordered Quantum Systems (DisQS) <br />
+Department of Physics <br />
+Warwick University</p>
+<p><a href="mailto:joe.webb@warwick.ac.uk">joe.webb@warwick.ac.uk</a> <br />
+<a href="https://www.linkedin.com/in/wephy">https://www.linkedin.com/in/wephy</a></p>
 
                     </main>
 
