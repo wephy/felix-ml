@@ -4,28 +4,27 @@
 # python train.py experiment=example
 
 defaults:
-  - override /data: cvae.yaml
-  - override /model: convolutional.yaml
+  - override /data: vae.yaml
+  - override /model: vae.yaml
   - override /callbacks: default.yaml
   - override /trainer: default.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["cvae", "convolutional"]
+tags: ["vae"]
 
 seed: 12345
 
 trainer:
-  min_epochs: 10
+  min_epochs: 2
   max_epochs: 10
   gradient_clip_val: 0.5
 
 model:
   optimizer:
-    lr: 0.0005
-  net:
-    latent_dims: 25
+    lr: 0.001
+  # net:
 
 data:
   batch_size: 16

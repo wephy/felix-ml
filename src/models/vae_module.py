@@ -43,14 +43,24 @@ class VAELitModule(LightningModule):
         self.val_loss = MeanMetric()
         self.test_loss = MeanMetric()
 
-    def loss_function(self, recons, x, mu, logvar):
-        MSE = torch.nn.functional.mse_loss(recons, x)
-        # BCE = torch.nn.functional.binary_cross_entropy(recons, x)
-        KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-        return MSE + KLD
+    def loss_function(self, true, predict, mu, logvar):
+        x_bar = torch.mean(true)
+        y_bar = torch.mean(predict)
+        u = true - x_bar
+        v = predict - y_bar
 
-    def forward(self, x: torch.Tensor, y: torch.Tensor):
-        return self.net(x, y)
+        top = torch.dot(u.flatten(), v.flatten())
+        bottom = torch.norm(u) * torch.norm(v)
+        zncc = top/bottom
+        batch_size = true.size(0)
+        # BCE = torch.nn.functional.binary_cross_entropy(predict.view(16, -1), true.view(16, -1), reduction='sum')
+        KLD = -0.5 * (1 + logvar - mu.pow(2) - logvar.exp()).mean()
+
+        # return (1 - zncc) + KLD
+        return (1 - zncc) + KLD * 0.005
+
+    def forward(self, x: torch.Tensor):
+        return self.net(x)
 
     def on_train_start(self):
         # by default lightning executes validation step sanity checks before training starts,
@@ -58,13 +68,9 @@ class VAELitModule(LightningModule):
         self.val_loss.reset()
 
     def model_step(self, batch: Any):
-        x, y = batch
-        # batch_size, features_size = x.size()
-        # x = x.view(batch_size, -1)
-        # y = x.view(batch_size, -1)
-        recons, mu, logvar = self.forward(x, y)
-        loss = self.criterion(recons, x, mu, logvar)
-        # preds = torch.argmax(logits, dim=1)
+        x = batch
+        recons, mu, logvar = self.forward(x)
+        loss = self.criterion(x, recons, mu, logvar)
         return loss, recons, x
 
     def training_step(self, batch: Any, batch_idx: int):
@@ -98,7 +104,7 @@ class VAELitModule(LightningModule):
         self.log("test/loss", self.test_loss, on_step=False, on_epoch=True, prog_bar=True)
 
     def on_test_epoch_end(self):
-        torch.save(self.net.state_dict(), "model.pt")
+        torch.save(self.net.state_dict(), "vae.pt")
 
     def configure_optimizers(self):
         """Choose what optimizers and learning-rate schedulers to use in your optimization.

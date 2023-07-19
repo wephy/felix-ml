@@ -9,7 +9,7 @@ from torchvision.transforms import transforms
 import numpy as np
 
 
-class Training3(Dataset):
+class VAE000(Dataset):
     def __init__(self, data_dir, transform=None):
         self.data_dir = data_dir
         self.transform = transform
@@ -21,15 +21,13 @@ class Training3(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        folders = os.listdir(self.data_dir)
-        folder = folders[idx]
+        CISD = os.listdir(self.data_dir)[idx]
 
-        print(os.listdir(os.path.join(self.data_dir, folder)))
+        pattern = np.clip(np.fromfile(
+            os.path.join(self.data_dir, CISD, f"{CISD}_+0+0+0.bin"),
+            dtype=np.float64), 0.0, 1.0)
 
-        # structure_factors = np.loadtxt(os.path.join(self.data_dir, folder, folder + "_128x128", "StructureFactors.txt"))
-        # felix_pattern = np.clip(np.fromfile(os.path.join(self.data_dir, folder, folder + "_128x128", folder+"_+0+0+0.bin"), dtype=np.float64), 0.0, 1.0)
-        
-        return torch.from_numpy(felix_pattern).float().clone().detach().view(1, 128, 128), torch.from_numpy(structure_factors).float().clone().detach()
+        return torch.from_numpy(pattern).to(torch.float32).clone().detach().view(1, 128, 128)
 
 
 class VAEDataModule(LightningDataModule):
@@ -62,9 +60,9 @@ class VAEDataModule(LightningDataModule):
         self,
         data_dir,
         train_val_test_split: Tuple[int, int, int],
-        batch_size: int = 64,
-        num_workers: int = 0,
-        pin_memory: bool = False,
+        batch_size: int,
+        num_workers: int,
+        pin_memory: bool,
     ):
         super().__init__()
 
@@ -82,9 +80,6 @@ class VAEDataModule(LightningDataModule):
         self.data_test: Optional[Dataset] = None
         
         self.data_dir = data_dir
-    # @property
-    # def num_classes(self):
-    #     return 10
 
     def setup(self, stage: Optional[str] = None):
         """Load data. Set variables: `self.data_train`, `self.data_val`, `self.data_test`.
@@ -94,7 +89,7 @@ class VAEDataModule(LightningDataModule):
         """
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            dataset = Training3(self.data_dir, transform=self.transforms)
+            dataset = VAE000(self.data_dir, transform=self.transforms)
             self.data_train, self.data_val, self.data_test = random_split(
                 dataset=dataset,
                 lengths=self.hparams.train_val_test_split,
@@ -143,4 +138,3 @@ class VAEDataModule(LightningDataModule):
 
 if __name__ == "__main__":
     _ = VAEDataModule()
-    
