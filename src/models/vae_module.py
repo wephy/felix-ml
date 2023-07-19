@@ -44,10 +44,10 @@ class VAELitModule(LightningModule):
         self.test_loss = MeanMetric()
 
     def loss_function(self, recons, x, mu, logvar):
-        # MSE = torch.nn.functional.mse_loss(recons, x)
-        BCE = torch.nn.functional.binary_cross_entropy(recons, x)
+        MSE = torch.nn.functional.mse_loss(recons, x)
+        # BCE = torch.nn.functional.binary_cross_entropy(recons, x)
         KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-        return BCE + KLD
+        return MSE + KLD
 
     def forward(self, x: torch.Tensor, y: torch.Tensor):
         return self.net(x, y)
@@ -59,8 +59,9 @@ class VAELitModule(LightningModule):
 
     def model_step(self, batch: Any):
         x, y = batch
-        batch_size, channels, width, height = x.size()
-        x = x.view(batch_size, -1)
+        # batch_size, features_size = x.size()
+        # x = x.view(batch_size, -1)
+        # y = x.view(batch_size, -1)
         recons, mu, logvar = self.forward(x, y)
         loss = self.criterion(recons, x, mu, logvar)
         # preds = torch.argmax(logits, dim=1)
@@ -97,7 +98,7 @@ class VAELitModule(LightningModule):
         self.log("test/loss", self.test_loss, on_step=False, on_epoch=True, prog_bar=True)
 
     def on_test_epoch_end(self):
-        torch.save(self, "model.pt")
+        torch.save(self.net.state_dict(), "model.pt")
 
     def configure_optimizers(self):
         """Choose what optimizers and learning-rate schedulers to use in your optimization.

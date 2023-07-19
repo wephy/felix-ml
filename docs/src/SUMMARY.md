@@ -11,6 +11,10 @@
 ## Getting started
 - [Getting started](getting-started.md)
     - [Installation](installation.md)
+    - [Troubleshooting](troubleshooting.md)
+
+## How it works
+- [How it works](how-it-works.md)
     - [Project Structure](project-structure.md)
     - [Configs](configs.md)
     - [Customising your dataset](customising-your-dataset.md)
@@ -26,7 +30,7 @@
 
 ## Research
 - [Research](research.md)
-    - [Can machine learning do it?](can-machine-learning-do-it.md)
+    - [Structure Factors](structure-factors.md)
     - [My datasets](datasets.md)
 
 ## References

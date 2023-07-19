@@ -1,7 +1,5 @@
 # Project Structure
 
-The structure of this project may seem confusing at first, so this page will hopefully explain all of that for you.
-
 ```txt
 ├── .github                <- Github Actions workflows
 │

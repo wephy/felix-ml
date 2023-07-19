@@ -20,10 +20,17 @@ class VAE000(Dataset):
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
-        folder = os.listdir(self.data_dir)[idx]
-        input_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Input.npy")), 0.0, 1.0)
-        output_img = np.clip(np.load(os.path.join(self.data_dir, folder, "Output.npy")), 0.0, 1.0)
-        return torch.from_numpy(output_img).float().clone().detach(), torch.from_numpy(input_img).float().clone().detach()
+
+        CISD = os.listdir(self.data_dir)[idx]
+
+        pattern = np.clip(np.fromfile(
+            os.path.join(self.data_dir, CISD, f"{CISD}_+0+0+0.bin"),
+            dtype=np.float64), 0.0, 1.0)
+        structure_factors = np.loadtxt(
+            os.path.join(self.data_dir, CISD, f"{CISD}_structure_factors.txt"))
+
+        return (torch.from_numpy(pattern).to(torch.float32).clone().detach().view(-1),
+                torch.from_numpy(structure_factors).float().clone().detach().view(-1))
 
 
 class VAEDataModule(LightningDataModule):
@@ -56,9 +63,9 @@ class VAEDataModule(LightningDataModule):
         self,
         data_dir,
         train_val_test_split: Tuple[int, int, int],
-        batch_size: int = 64,
-        num_workers: int = 0,
-        pin_memory: bool = False,
+        batch_size: int,
+        num_workers: int,
+        pin_memory: bool,
     ):
         super().__init__()
 
@@ -76,9 +83,6 @@ class VAEDataModule(LightningDataModule):
         self.data_test: Optional[Dataset] = None
         
         self.data_dir = data_dir
-    # @property
-    # def num_classes(self):
-    #     return 10
 
     def setup(self, stage: Optional[str] = None):
         """Load data. Set variables: `self.data_train`, `self.data_val`, `self.data_test`.
