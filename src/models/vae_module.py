@@ -98,7 +98,7 @@ class VAELitModule(LightningModule):
         self.log("test/loss", self.test_loss, on_step=False, on_epoch=True, prog_bar=True)
 
     def on_test_epoch_end(self):
-        torch.save(self.net.state_dict(), "vae.pt")
+        torch.save(self.net.state_dict(), "saved_models/vae.pt")
 
     def configure_optimizers(self):
         """Choose what optimizers and learning-rate schedulers to use in your optimization.
