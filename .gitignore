@@ -3,7 +3,6 @@ configs/local/default.yaml
 /logs/
 .env
 /data/
-*.pt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

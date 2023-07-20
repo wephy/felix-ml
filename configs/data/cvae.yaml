@@ -1,0 +1,6 @@
+_target_: src.data.cvae.VAEDataModule
+data_dir: ${paths.data_dir}/VAE000/cleaned_data
+batch_size: 16
+train_val_test_split: [10454, 1000, 1000]
+num_workers: 8
+pin_memory: False

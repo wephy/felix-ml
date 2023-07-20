@@ -33,6 +33,7 @@ class VAELitModule(LightningModule):
         # also ensures init params will be stored in ckpt
         self.save_hyperparameters(logger=False)
 
+        # model
         self.net = net
 
         # loss function
@@ -43,38 +44,31 @@ class VAELitModule(LightningModule):
         self.val_loss = MeanMetric()
         self.test_loss = MeanMetric()
 
-    def loss_function(self, true, predict, mu, logvar):
-        x_bar = torch.mean(true)
-        y_bar = torch.mean(predict)
-        u = true - x_bar
-        v = predict - y_bar
-
+    def loss_function(self, trues, recons, mu, logvar):
+        x_bar = torch.mean(trues)
+        y_bar = torch.mean(recons)
+        u = trues - x_bar
+        v = recons - y_bar
         top = torch.dot(u.flatten(), v.flatten())
         bottom = torch.norm(u) * torch.norm(v)
         zncc = top/bottom
-        batch_size = true.size(0)
-        # BCE = torch.nn.functional.binary_cross_entropy(predict.view(16, -1), true.view(16, -1), reduction='sum')
         KLD = -0.5 * (1 + logvar - mu.pow(2) - logvar.exp()).mean()
-
-        # return (1 - zncc) + KLD
         return (1 - zncc) + KLD * 0.005
 
-    def forward(self, x: torch.Tensor):
-        return self.net(x)
+    def forward(self, trues: torch.Tensor):
+        return self.net(trues)
 
     def on_train_start(self):
-        # by default lightning executes validation step sanity checks before training starts,
-        # so it's worth to make sure validation metrics don't store results from these checks
         self.val_loss.reset()
 
     def model_step(self, batch: Any):
-        x = batch
-        recons, mu, logvar = self.forward(x)
-        loss = self.criterion(x, recons, mu, logvar)
-        return loss, recons, x
+        trues = batch
+        recons, mu, logvar = self.forward(trues)
+        loss = self.criterion(trues, recons, mu, logvar)
+        return loss, recons, trues
 
     def training_step(self, batch: Any, batch_idx: int):
-        loss, recons, x = self.model_step(batch)
+        loss, _, _ = self.model_step(batch)
 
         # update and log metrics
         self.train_loss(loss)
@@ -87,7 +81,7 @@ class VAELitModule(LightningModule):
         pass
 
     def validation_step(self, batch: Any, batch_idx: int):
-        loss, recons, _ = self.model_step(batch)
+        loss, _, _ = self.model_step(batch)
 
         # update and log metrics
         self.val_loss(loss)
@@ -97,7 +91,7 @@ class VAELitModule(LightningModule):
         pass
 
     def test_step(self, batch: Any, batch_idx: int):
-        loss, recons, _ = self.model_step(batch)
+        loss, _, _ = self.model_step(batch)
 
         # update and log metrics
         self.test_loss(loss)
