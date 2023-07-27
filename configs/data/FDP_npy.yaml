@@ -1,0 +1,6 @@
+_target_: src.data.FDP_npy.FDPDataModule
+data_dir: ${paths.data_dir}/FDP
+batch_size: 16
+train_val_test_split: [10_454, 1_000, 1_000]
+num_workers: 8
+pin_memory: False
