@@ -1,6 +1,0 @@
-_target_: src.data.vae000_lattice_datamodule.VAEDataModule
-data_dir: ${paths.data_dir}/VAE000_lattice
-batch_size: 16
-train_val_test_split: [10_205, 1_000, 1_000]
-num_workers: 8
-pin_memory: False

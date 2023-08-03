@@ -17,21 +17,20 @@ tags: ["cvae"]
 seed: 12345
 
 trainer:
+  min_epochs: 2
   max_epochs: 20
-  accelerator: gpu
-  devices: 1
-  precision: 16
 
 data:
-  batch_size: 64
+  data_dir: /storage/disqs/Felix-ML/data
+  batch_size: 32
 
 model:
   config:
     loss_function:
-      _target_: src.models.util.mse
+      _target_: src.models.util.zncc
       embedding_weight: 0.01
-    latent_dims: 32
-    learning_rate: 0.001
+    latent_dims: 8
+    learning_rate: 0.0002
 
 logger:
   csv:

@@ -17,7 +17,9 @@ for datapoint in os.listdir(data_loc):
 
     # CHECK DATA EXISTS, CONTINUE IF ISSUE
     try:
-        pattern, structure_factors = os.listdir(os.path.join(data_loc, datapoint, felix_output))
+        pattern, structure_factors = os.listdir(
+            os.path.join(data_loc, datapoint, felix_output)
+        )
     except:
         no_data += 1
         continue
@@ -45,22 +47,22 @@ for datapoint in os.listdir(data_loc):
     # they will become {ICSD_code}_+0+0+0.bin and {ICSD_code}_structure_factors.txt
     os.mkdir(os.path.join(target_loc, ICSD_code))
     copyfile(
-            os.path.join(data_loc, datapoint, "felix.hkl"),
-            os.path.join(target_loc, ICSD_code, "felix.khl")
-        )
+        os.path.join(data_loc, datapoint, "felix.hkl"),
+        os.path.join(target_loc, ICSD_code, "felix.khl"),
+    )
     copyfile(
-            os.path.join(data_loc, datapoint, "felix.inp"),
-            os.path.join(target_loc, ICSD_code, "felix.inp")
-        )
+        os.path.join(data_loc, datapoint, "felix.inp"),
+        os.path.join(target_loc, ICSD_code, "felix.inp"),
+    )
     copyfile(
-            os.path.join(data_loc, datapoint, "felix.cif"),
-            os.path.join(target_loc, ICSD_code, f"{ICSD_code}.cif")
-        )
+        os.path.join(data_loc, datapoint, "felix.cif"),
+        os.path.join(target_loc, ICSD_code, f"{ICSD_code}.cif"),
+    )
     copyfile(
-            os.path.join(data_loc, datapoint, felix_output, pattern),
-            os.path.join(target_loc, ICSD_code, f"{ICSD_code}_+0+0+0.bin")
-        )
+        os.path.join(data_loc, datapoint, felix_output, pattern),
+        os.path.join(target_loc, ICSD_code, f"{ICSD_code}_+0+0+0.bin"),
+    )
     copyfile(
-            os.path.join(data_loc, datapoint, felix_output, structure_factors),
-            os.path.join(target_loc, ICSD_code, f"{ICSD_code}_structure_factors.txt")
-        )
+        os.path.join(data_loc, datapoint, felix_output, structure_factors),
+        os.path.join(target_loc, ICSD_code, f"{ICSD_code}_structure_factors.txt"),
+    )

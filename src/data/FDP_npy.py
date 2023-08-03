@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional, Tuple
 
 import os
 import torch
+
 # from skimage import io
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
@@ -25,12 +26,16 @@ class FDP(Dataset):
         ICSD_code = self.ICSD_codes[idx]
         structure = np.load(
             os.path.join(self.data_dir, ICSD_code, ICSD_code + "_structure.npy")
-            )
-        pattern = np.clip(np.load(
-            os.path.join(self.data_dir, ICSD_code, ICSD_code + "_+0+0+0.npy")
-            ), 0.0, 1.0)
-        return (torch.from_numpy(pattern).float().clone().detach().view(1, 128, 128),
-                torch.from_numpy(structure).float().clone().detach().view(1, 128, 128))
+        )
+        pattern = np.clip(
+            np.load(os.path.join(self.data_dir, ICSD_code, ICSD_code + "_+0+0+0.npy")),
+            0.0,
+            1.0,
+        )
+        return (
+            torch.from_numpy(pattern).float().clone().detach().view(1, 128, 128),
+            torch.from_numpy(structure).float().clone().detach().view(1, 128, 128),
+        )
 
 
 class FDPDataModule(LightningDataModule):
@@ -59,6 +64,7 @@ class FDPDataModule(LightningDataModule):
     Read the docs:
         https://lightning.ai/docs/pytorch/latest/data/datamodule.html
     """
+
     def __init__(
         self,
         data_dir,
@@ -75,7 +81,9 @@ class FDPDataModule(LightningDataModule):
 
         # data transformations
         self.transforms = transforms.Compose(
-            [transforms.ToTensor(), ]
+            [
+                transforms.ToTensor(),
+            ]
         )
 
         self.data_train = None
