@@ -24,18 +24,24 @@ class FDP(Dataset):
             idx = idx.tolist()
 
         ICSD_code = self.ICSD_codes[idx]
+
         structure = np.load(
             os.path.join(self.data_dir, ICSD_code, ICSD_code + "_structure.npy")
-        )
+        ).astype(np.float32)
         pattern = np.clip(
             np.load(os.path.join(self.data_dir, ICSD_code, ICSD_code + "_+0+0+0.npy")),
             0.0,
             1.0,
-        )
-        return (
-            torch.from_numpy(pattern).float().clone().detach().view(1, 128, 128),
-            torch.from_numpy(structure).float().clone().detach().view(1, 128, 128),
-        )
+        ).astype(np.float32)
+
+        # structure = torch.from_numpy(structure).float().clone().detach().view(1, 128, 128)
+        # pattern = torch.from_numpy(pattern).float().clone().detach().view(1, 128, 128)
+
+        if self.transform:
+            structure = self.transform(structure)
+            pattern = self.transform(pattern)
+
+        return (pattern, structure)
 
 
 class FDPDataModule(LightningDataModule):

@@ -1,8 +1,0 @@
-_target_: src.models.CVAE.CVAELitModule
-
-config:
-  learning_rate: 0.0005
-  loss_function:
-    _target_: src.models.util.mse
-    embedding_weight: 0.001
-  latent_dims: 16

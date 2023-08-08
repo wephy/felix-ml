@@ -4,34 +4,32 @@
 # python train.py experiment=example
 
 defaults:
-  - override /data: FDP_npy.yaml
-  - override /model: cvae.yaml
+  - override /data: default.yaml
+  - override /model: resnetvae.yaml
   - override /callbacks: default.yaml
   - override /trainer: default.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["cvae"]
+tags: ["ResNetVAE"]
 
 seed: 12345
 
 trainer:
-  max_epochs: 20
+  max_epochs: 50
   accelerator: gpu
-  devices: 1
-  precision: 16
 
 data:
-  batch_size: 64
+  batch_size: 32
+  num_workers: 8
 
 model:
   config:
     loss_function:
-      _target_: src.models.util.mse
-      embedding_weight: 0.01
-    latent_dims: 32
-    learning_rate: 0.001
+      _target_: src.models.util.bce
+    embed_dim: 512
+    learning_rate: 0.0003
 
 logger:
   csv:
