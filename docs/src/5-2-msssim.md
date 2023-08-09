@@ -167,3 +167,5 @@ We see that significant structural progress is still being made at high epochs, 
 ![ms-ssim loss](./images/MS-SSIM-analysis.png)
 
 Whilst progress is continually being made on the validation set at high epochs, notice that after epoch 30, we have overfitting occur as the training set sees much greater benefits per epoch. This suggests that the 64 latent dimensions (as seen in the configuration) finally becomes a problem when such an intelligent loss function is used. This is in contrast to what is seen when using BCE and MSE, as they do not encounter the same issues at 64 dimensions.
+
+![ms-ssim loss](./images/MS-SSIM-dims.png)
