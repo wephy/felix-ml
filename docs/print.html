@@ -450,6 +450,7 @@ conda activate felix-ml
 <p><strong>Investigating loss over the course of training.</strong></p>
 <p><img src="./images/MS-SSIM-analysis.png" alt="ms-ssim loss" /></p>
 <p>Whilst progress is continually being made on the validation set at high epochs, notice that after epoch 30, we have overfitting occur as the training set sees much greater benefits per epoch. This suggests that the 64 latent dimensions (as seen in the configuration) finally becomes a problem when such an intelligent loss function is used. This is in contrast to what is seen when using BCE and MSE, as they do not encounter the same issues at 64 dimensions.</p>
+<p><img src="./images/MS-SSIM-dims.png" alt="ms-ssim loss" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
 <div class="table-wrapper"><table><thead><tr><th>type</th><th>author</th><th>title</th></tr></thead><tbody>
 <tr><td>article</td><td>Snell J, Ridgeway K, Liao R et al.</td><td>Learning to Generate Images with Perceptual Similarity Metrics</td></tr>
