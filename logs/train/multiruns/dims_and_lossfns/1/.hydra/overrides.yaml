@@ -1,0 +1,2 @@
+- model.config.embed_dim=16
+- model.config.loss_function._target_=src.models.util.mse

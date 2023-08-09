@@ -1,6 +1,6 @@
 # Lightning-Hydra-Template
 configs/local/default.yaml
-/logs/
+*.ckpt
 .env
 /data/
 

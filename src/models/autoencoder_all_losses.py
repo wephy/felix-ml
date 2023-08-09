@@ -187,9 +187,9 @@ class AELitModule(LightningModule):
         self.embed_dim = config.embed_dim
 
         self.model = Autoencoder(embed_dim=config.embed_dim)
-        self.loss_function1 = MS_SSIM_Loss(data_range=1.0, channel=1, win_size=7)
-        self.loss_function2 = nn.MSELoss()
-        self.loss_function3 = nn.BCELoss()
+        self.loss_function = MS_SSIM_Loss(data_range=1.0, channel=1, win_size=7)
+        self.MSE = nn.MSELoss()
+        self.BCE = nn.BCELoss()
         
         # metric objects for calculating and averaging accuracy across batches
         # self.train_acc = Accuracy(task="binary")
@@ -215,9 +215,9 @@ class AELitModule(LightningModule):
     def model_step(self, real, condition):
         # Pre-training using real images
         fake = self.model(condition)
-        loss1 = self.loss_function1(fake, real)
-        loss2 = self.loss_function2(fake, real)
-        loss3 = self.loss_function3(fake, real)
+        loss1 = self.loss_function(fake, real)
+        loss2 = self.MSE(fake, real)
+        loss3 = self.BCE(fake, real)
 
         return loss1, loss2, loss3, fake
 
