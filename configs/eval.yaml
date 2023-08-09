@@ -2,8 +2,8 @@
 
 defaults:
   - _self_
-  - data: cvae.yaml # choose datamodule with `test_dataloader()` for evaluation
-  - model: convolutional.yaml
+  - data: default.yaml # choose datamodule with `test_dataloader()` for evaluation
+  - model: autoencoder_all_losses.yaml
   - logger: csv
   - trainer: default.yaml
   - paths: default.yaml
@@ -15,4 +15,4 @@ task_name: "eval"
 tags: ["dev"]
 
 # passing checkpoint path is necessary for evaluation
-ckpt_path: ???
+ckpt_path: logs/train/runs/2023-08-09_02-52-26/checkpoints/epoch_049.ckpt
