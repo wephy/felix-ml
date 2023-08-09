@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Felix ML</title>
-        <meta name="robots" content="noindex" />
+        <title>MS-SSIM Loss Function - Felix ML</title>
 
 
         <!-- Custom HTML head -->
@@ -84,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html" class="active"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -170,128 +169,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="home"><a class="header" href="#home">Home</a></h1>
-<p><em>by Joe Webb</em></p>
-<p>Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.</p>
-<blockquote>
-<p>Felix ML owes itself to many wonderful existing projects and tools:</p>
-<ul>
-<li>🔥 <a href="https://pytorch.org">PyTorch</a> </li>
-<li>⚡ <a href="https://lightning.ai">Lightning</a> </li>
-<li>🐉 <a href="https://hydra.cc">Hydra</a> </li>
-<li>🚀 <a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a> </li>
-<li>📓 <a href="https://rust-lang.github.io/mdBook/">mdBook</a> </li>
-</ul>
-</blockquote>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>Welcome to <em>Felix ML</em>. </p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Before you can play around with Felix ML, you'll need to make sure all the package requirements are met, some of which specific versions might be needed.</p>
-<blockquote>
-<p>I recommend using <a href="https://www.anaconda.com/download">Anaconda</a> to manage an environment for this, and once Anaconda is installed, you have two options: <code>pip</code> or <code>conda</code>. You may prefer to use conda as pip installs packages in a loop, without ensuring dependencies across all packages are fulfilled simultaneously, but conda achieves proper dependency control across all packages; furthermore, conda allows for installing packages without requiring certain compilers or libraries to be available in the system, since it installs precompiled binaries. Regardless, I recommend pip as conda can take an unacceptably long time to resolve.</p>
-</blockquote>
-<ol>
-<li>
-<p>Install <a href="https://www.anaconda.com/download">Anaconda</a></p>
-</li>
-<li>
-<p>If you machine has a <a href="https://developer.nvidia.com/cuda-gpus">CUDA-enabled GPU</a>, install <a href="https://developer.nvidia.com/cuda-downloads">CUDA</a></p>
-</li>
-<li>
-<p>Choose one of the following methods:</p>
-<h4 id="pip"><a class="header" href="#pip">Pip</a></h4>
-<pre><code class="language-bash"># clone project
-git clone https://github.com/wephy/felix-ml
-cd felix-ml
-
-# [OPTIONAL] create conda environment
-conda create -n felix-ml python=3.9
-conda activate felix-ml
-
-# install pytorch according to instructions
-# https://pytorch.org/get-started/
-
-# install requirements
-pip install -r requirements.txt
-</code></pre>
-<h4 id="conda"><a class="header" href="#conda">Conda</a></h4>
-<pre><code class="language-bash"># clone project
-git clone https://github.com/wephy/felix-ml
-cd felix-ml
-
-# create conda environment and install dependencies
-conda env create -f environment.yaml -n felix-ml
-
-# activate conda environment
-conda activate felix-ml
-</code></pre>
-</li>
-</ol>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h1>
-<pre><code class="language-txt">├── .github                &lt;- Github Actions workflows
-│
-├── configs                &lt;- Hydra configs
-│   ├── callbacks             &lt;- Callbacks configs
-│   ├── data                  &lt;- Data configs
-│   ├── debug                 &lt;- Debugging configs
-│   ├── experiment            &lt;- Experiment configs
-│   ├── extras                &lt;- Extra utilities configs
-│   ├── hparams_search        &lt;- Hyperparameter search configs
-│   ├── hydra                 &lt;- Hydra configs
-│   ├── local                 &lt;- Local configs
-│   ├── logger                &lt;- Logger configs
-│   ├── model                 &lt;- Model configs
-│   ├── paths                 &lt;- Project paths configs
-│   ├── trainer               &lt;- Trainer configs
-│   ├── eval.yaml             &lt;- Main config for evaluation
-│   └── train.yaml            &lt;- Main config for training
-│
-├── data                   &lt;- Project data
-│
-├── docs                   &lt;- Website files
-│
-├── logs                   &lt;- Logs generated by hydra and lightning loggers
-│
-├── notebooks              &lt;- Jupyter notebooks
-│
-├── scripts                &lt;- Shell scripts
-│
-├── src                    &lt;- Source code
-│   ├── data                  &lt;- Data scripts
-│   ├── models                &lt;- Model scripts
-│   ├── utils                 &lt;- Utility scripts
-│   ├── eval.py               &lt;- Run evaluation
-│   └── train.py              &lt;- Run training
-│
-├── .gitignore                &lt;- List of files ignored by git
-├── .pre-commit-config.yaml   &lt;- Configuration of pre-commit hooks for code formatting
-├── .project-root             &lt;- File for inferring the position of root directory
-├── environment.yaml          &lt;- File for installing conda environment
-├── Makefile                  &lt;- Makefile with commands like `make train`
-├── pyproject.toml            &lt;- Configuration options for testing and linting
-├── README.md                 &lt;- README file
-└── requirements.txt          &lt;- File for installing python dependencies
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="research"><a class="header" href="#research">Research</a></h1>
-<p>All things research related go here.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="dataset-structure"><a class="header" href="#dataset-structure">Dataset Structure</a></h1>
-<pre><code class="language-txt">├── 16                          &lt;- ICSD code
-│   ├── 16_+0+0+0.npy              &lt;- Diffraction iamge as numpy array
-│   ├── 16_+0+0+0.png              &lt;- Diffraction image as png
-│   ├── 16_structure_factors.txt   &lt;- Structure factors for computing electron density
-│   ├── 16_structure.npy           &lt;- Electron density as numpy array
-│   ├── 16_structure.png           &lt;- Electron density as png
-│   ├── 16.cif                     &lt;- File containing crystal information
-│   ├── felix.inp                  &lt;- File containing Felix settings
-│   └── felix.hkl                  &lt;- File for which Felix angles
-│
-├── 25
-.   ├── 25_+0+0+0.npy
-.   .
-.   .
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ms-ssim-loss-function"><a class="header" href="#ms-ssim-loss-function">MS-SSIM Loss Function</a></h1>
+                        <h1 id="ms-ssim-loss-function"><a class="header" href="#ms-ssim-loss-function">MS-SSIM Loss Function</a></h1>
 <p>SSIM is a perception-based model that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. The difference with other techniques such as MSE or PSNR is that these approaches estimate absolute errors. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects.</p>
 <h3 id="tests"><a class="header" href="#tests">Tests</a></h3>
 <p>The following configurations and models were used.</p>
@@ -450,25 +328,18 @@ conda activate felix-ml
 <p><strong>Investigating loss over the course of training.</strong></p>
 <p><img src="./images/MS-SSIM-analysis.png" alt="ms-ssim loss" /></p>
 <p>Whilst progress is continually being made on the validation set at high epochs, notice that after epoch 30, we have overfitting occur as the training set sees much greater benefits per epoch. This suggests that the 64 latent dimensions (as seen in the configuration) finally becomes a problem when such an intelligent loss function is used. This is in contrast to what is seen when using BCE and MSE, as they do not encounter the same issues at 64 dimensions.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
-<div class="table-wrapper"><table><thead><tr><th>type</th><th>author</th><th>title</th></tr></thead><tbody>
-<tr><td>article</td><td>Snell J, Ridgeway K, Liao R et al.</td><td>Learning to Generate Images with Perceptual Similarity Metrics</td></tr>
-<tr><td>github</td><td>Fang Gongfan</td><td>https://github.com/VainF/pytorch-msssim</td></tr>
-</tbody></table>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="contact"><a class="header" href="#contact">Contact</a></h1>
-<p>Joe Webb <br />
-Student. BSc Mathematics and Physics</p>
-<p>Disordered Quantum Systems (DisQS) <br />
-Department of Physics <br />
-Warwick University</p>
-<p><a href="mailto:joe.webb@warwick.ac.uk">joe.webb@warwick.ac.uk</a> <br />
-<a href="https://www.linkedin.com/in/wephy">https://www.linkedin.com/in/wephy</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5-1-dataset-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next" href="6-references.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -476,7 +347,13 @@ Warwick University</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5-1-dataset-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next" href="6-references.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -515,11 +392,6 @@ Warwick University</p>
 
         <!-- Custom JS scripts -->
 
-        <script>
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
 
     </div>
     </body>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Felix ML</title>
+        <title>Installation - Felix ML</title>
 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html" class="active">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html" class="active"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,26 +169,58 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="home"><a class="header" href="#home">Home</a></h1>
-<p><em>by Joe Webb</em></p>
-<p>Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.</p>
+                        <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Before you can play around with Felix ML, you'll need to make sure all the package requirements are met, some of which specific versions might be needed.</p>
 <blockquote>
-<p>Felix ML owes itself to many wonderful existing projects and tools:</p>
-<ul>
-<li>🔥 <a href="https://pytorch.org">PyTorch</a> </li>
-<li>⚡ <a href="https://lightning.ai">Lightning</a> </li>
-<li>🐉 <a href="https://hydra.cc">Hydra</a> </li>
-<li>🚀 <a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a> </li>
-<li>📓 <a href="https://rust-lang.github.io/mdBook/">mdBook</a> </li>
-</ul>
+<p>I recommend using <a href="https://www.anaconda.com/download">Anaconda</a> to manage an environment for this, and once Anaconda is installed, you have two options: <code>pip</code> or <code>conda</code>. You may prefer to use conda as pip installs packages in a loop, without ensuring dependencies across all packages are fulfilled simultaneously, but conda achieves proper dependency control across all packages; furthermore, conda allows for installing packages without requiring certain compilers or libraries to be available in the system, since it installs precompiled binaries. Regardless, I recommend pip as conda can take an unacceptably long time to resolve.</p>
 </blockquote>
+<ol>
+<li>
+<p>Install <a href="https://www.anaconda.com/download">Anaconda</a></p>
+</li>
+<li>
+<p>If you machine has a <a href="https://developer.nvidia.com/cuda-gpus">CUDA-enabled GPU</a>, install <a href="https://developer.nvidia.com/cuda-downloads">CUDA</a></p>
+</li>
+<li>
+<p>Choose one of the following methods:</p>
+<h4 id="pip"><a class="header" href="#pip">Pip</a></h4>
+<pre><code class="language-bash"># clone project
+git clone https://github.com/wephy/felix-ml
+cd felix-ml
+
+# [OPTIONAL] create conda environment
+conda create -n felix-ml python=3.9
+conda activate felix-ml
+
+# install pytorch according to instructions
+# https://pytorch.org/get-started/
+
+# install requirements
+pip install -r requirements.txt
+</code></pre>
+<h4 id="conda"><a class="header" href="#conda">Conda</a></h4>
+<pre><code class="language-bash"># clone project
+git clone https://github.com/wephy/felix-ml
+cd felix-ml
+
+# create conda environment and install dependencies
+conda env create -f environment.yaml -n felix-ml
+
+# activate conda environment
+conda activate felix-ml
+</code></pre>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-0-getting-started.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next" href="1-introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="2-2-project-structure.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -198,8 +230,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-0-getting-started.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next" href="1-introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="2-2-project-structure.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

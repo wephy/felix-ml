@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Felix ML</title>
+        <title>Project Structure - Felix ML</title>
 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html" class="active">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html" class="active"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,26 +169,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="home"><a class="header" href="#home">Home</a></h1>
-<p><em>by Joe Webb</em></p>
-<p>Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.</p>
-<blockquote>
-<p>Felix ML owes itself to many wonderful existing projects and tools:</p>
-<ul>
-<li>🔥 <a href="https://pytorch.org">PyTorch</a> </li>
-<li>⚡ <a href="https://lightning.ai">Lightning</a> </li>
-<li>🐉 <a href="https://hydra.cc">Hydra</a> </li>
-<li>🚀 <a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a> </li>
-<li>📓 <a href="https://rust-lang.github.io/mdBook/">mdBook</a> </li>
-</ul>
-</blockquote>
+                        <h1 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h1>
+<pre><code class="language-txt">├── .github                &lt;- Github Actions workflows
+│
+├── configs                &lt;- Hydra configs
+│   ├── callbacks             &lt;- Callbacks configs
+│   ├── data                  &lt;- Data configs
+│   ├── debug                 &lt;- Debugging configs
+│   ├── experiment            &lt;- Experiment configs
+│   ├── extras                &lt;- Extra utilities configs
+│   ├── hparams_search        &lt;- Hyperparameter search configs
+│   ├── hydra                 &lt;- Hydra configs
+│   ├── local                 &lt;- Local configs
+│   ├── logger                &lt;- Logger configs
+│   ├── model                 &lt;- Model configs
+│   ├── paths                 &lt;- Project paths configs
+│   ├── trainer               &lt;- Trainer configs
+│   ├── eval.yaml             &lt;- Main config for evaluation
+│   └── train.yaml            &lt;- Main config for training
+│
+├── data                   &lt;- Project data
+│
+├── docs                   &lt;- Website files
+│
+├── logs                   &lt;- Logs generated by hydra and lightning loggers
+│
+├── notebooks              &lt;- Jupyter notebooks
+│
+├── scripts                &lt;- Shell scripts
+│
+├── src                    &lt;- Source code
+│   ├── data                  &lt;- Data scripts
+│   ├── models                &lt;- Model scripts
+│   ├── utils                 &lt;- Utility scripts
+│   ├── eval.py               &lt;- Run evaluation
+│   └── train.py              &lt;- Run training
+│
+├── .gitignore                &lt;- List of files ignored by git
+├── .pre-commit-config.yaml   &lt;- Configuration of pre-commit hooks for code formatting
+├── .project-root             &lt;- File for inferring the position of root directory
+├── environment.yaml          &lt;- File for installing conda environment
+├── Makefile                  &lt;- Makefile with commands like `make train`
+├── pyproject.toml            &lt;- Configuration options for testing and linting
+├── README.md                 &lt;- README file
+└── requirements.txt          &lt;- File for installing python dependencies
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-1-installation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next" href="1-introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="5-0-research.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -198,8 +233,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-1-installation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next" href="1-introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="5-0-research.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

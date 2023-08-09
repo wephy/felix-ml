@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Felix ML</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">1.2.</strong> Troubleshooting</a></li></ol></li><li class="chapter-item expanded "><a href="how-it-works.html"><strong aria-hidden="true">2.</strong> How it works</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="project-structure.html"><strong aria-hidden="true">2.1.</strong> Project Structure</a></li><li class="chapter-item expanded "><a href="configs.html"><strong aria-hidden="true">2.2.</strong> Configs</a></li><li class="chapter-item expanded "><a href="customising-your-dataset.html"><strong aria-hidden="true">2.3.</strong> Customising your dataset</a></li><li class="chapter-item expanded "><a href="creating-models.html"><strong aria-hidden="true">2.4.</strong> Creating models</a></li><li class="chapter-item expanded "><a href="the-trainer.html"><strong aria-hidden="true">2.5.</strong> The trainer</a></li></ol></li><li class="chapter-item expanded "><a href="how-to-run.html"><strong aria-hidden="true">3.</strong> How to run</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="training-your-model.html"><strong aria-hidden="true">3.1.</strong> Training your model</a></li><li class="chapter-item expanded "><a href="evaluating-your-model.html"><strong aria-hidden="true">3.2.</strong> Evalutating your model</a></li><li class="chapter-item expanded "><a href="running-experiments.html"><strong aria-hidden="true">3.3.</strong> Running experiments</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">3.4.</strong> Logging</a></li></ol></li><li class="chapter-item expanded "><a href="research.html"><strong aria-hidden="true">4.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="structure-factors.html"><strong aria-hidden="true">4.1.</strong> Structure Factors</a></li><li class="chapter-item expanded "><a href="datasets.html"><strong aria-hidden="true">4.2.</strong> My datasets</a></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">5.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contact.html">Contact</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="0-title-page.html">Home</a></li><li class="chapter-item expanded affix "><a href="1-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2-0-getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="2-1-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="2-2-project-structure.html"><strong aria-hidden="true">1.2.</strong> Project Structure</a></li></ol></li><li class="chapter-item expanded "><a href="5-0-research.html"><strong aria-hidden="true">2.</strong> Research</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="5-1-dataset-structure.html"><strong aria-hidden="true">2.1.</strong> Dataset Structure</a></li><li class="chapter-item expanded "><a href="5-2-msssim.html"><strong aria-hidden="true">2.2.</strong> MS-SSIM Loss Function</a></li></ol></li><li class="chapter-item expanded "><a href="6-references.html"><strong aria-hidden="true">3.</strong> References</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="7-contact.html">Contact</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -170,7 +170,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="felix-ml"><a class="header" href="#felix-ml">Felix ML</a></h1>
+                        <h1 id="home"><a class="header" href="#home">Home</a></h1>
 <p><em>by Joe Webb</em></p>
 <p>Felix ML is a machine learning approach to diffraction patterns. It serves as a proof of concept that the field of microscopy can be greatly aided by the use of machine learning: electron diffraction experiments are expensive, existing computational methods are time-consuming, and machine learning has the benefit of being neither.</p>
 <blockquote>
@@ -186,11 +186,10 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>Welcome to <em>Felix ML</em>. </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
-<p>This section intends to teach you the ins-and-outs of the project, detailing how all parts work individually and together.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <p>Before you can play around with Felix ML, you'll need to make sure all the package requirements are met, some of which specific versions might be needed.</p>
 <blockquote>
-<p>I recommend using <a href="https://www.anaconda.com/download">Anaconda</a> to manage an environment for this, and once Anaconda is installed, you have two options: <code>pip</code> or <code>conda</code>. You may prefer to use conda as pip installs packages in a loop, without ensuring dependencies across all packages are fulfilled simultaneously, but conda achieves proper dependency control across all packages; furthermore, conda allows for installing packages without requiring certain compilers or libraries to be available in the system, since it installs precompiled binaries.</p>
+<p>I recommend using <a href="https://www.anaconda.com/download">Anaconda</a> to manage an environment for this, and once Anaconda is installed, you have two options: <code>pip</code> or <code>conda</code>. You may prefer to use conda as pip installs packages in a loop, without ensuring dependencies across all packages are fulfilled simultaneously, but conda achieves proper dependency control across all packages; furthermore, conda allows for installing packages without requiring certain compilers or libraries to be available in the system, since it installs precompiled binaries. Regardless, I recommend pip as conda can take an unacceptably long time to resolve.</p>
 </blockquote>
 <ol>
 <li>
@@ -222,15 +221,13 @@ git clone https://github.com/wephy/felix-ml
 cd felix-ml
 
 # create conda environment and install dependencies
-conda env create -f environment.yaml -n myenv
+conda env create -f environment.yaml -n felix-ml
 
 # activate conda environment
-conda activate myenv
+conda activate felix-ml
 </code></pre>
 </li>
 </ol>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h1>
 <pre><code class="language-txt">├── .github                &lt;- Github Actions workflows
 │
@@ -256,9 +253,7 @@ conda activate myenv
 │
 ├── logs                   &lt;- Logs generated by hydra and lightning loggers
 │
-├── notebooks              &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
-│                             the creator's initials, and a short `-` delimited description,
-│                             e.g. `1.0-jqp-initial-data-exploration.ipynb`.
+├── notebooks              &lt;- Jupyter notebooks
 │
 ├── scripts                &lt;- Shell scripts
 │
@@ -271,77 +266,196 @@ conda activate myenv
 │
 ├── .gitignore                &lt;- List of files ignored by git
 ├── .pre-commit-config.yaml   &lt;- Configuration of pre-commit hooks for code formatting
-├── .project-root             &lt;- File for inferring the position of project root directory
+├── .project-root             &lt;- File for inferring the position of root directory
 ├── environment.yaml          &lt;- File for installing conda environment
-├── Makefile                  &lt;- Makefile with commands like `make train` or `make test`
+├── Makefile                  &lt;- Makefile with commands like `make train`
 ├── pyproject.toml            &lt;- Configuration options for testing and linting
 ├── README.md                 &lt;- README file
 └── requirements.txt          &lt;- File for installing python dependencies
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="configs"><a class="header" href="#configs">Configs</a></h1>
-<p>With Hydra, we can manage everything with just a set of config files, which were outlined in the <a href="project-structure.html">project structure</a>. These have been seperated into categories, containing two key files <code>eval.yaml</code> and <code>train.yaml</code>, and the following sets (which you may want more than one configuration for):</p>
-<ul>
-<li><code>callbacks</code></li>
-<li><code>data</code></li>
-<li><code>debug</code></li>
-<li><code>experiment</code></li>
-<li><code>extras</code></li>
-<li><code>hparams_search</code></li>
-<li><code>hydra</code></li>
-<li><code>local</code></li>
-<li><code>logger</code></li>
-<li><code>model</code></li>
-<li><code>paths</code></li>
-<li><code>trainer</code></li>
-</ul>
-<h2 id="trainyaml-and-evalyaml"><a class="header" href="#trainyaml-and-evalyaml"><code>train.yaml</code> and <code>eval.yaml</code></a></h2>
-<p>Whenever you train or evaluate the model, e.g. via <code>make train</code> (or similarly <code>python src/train.py</code>), you use a selection of configs. This all happens in the <code>train.yaml</code> file. Here is a part of it:</p>
-<pre><code class="language-yaml">defaults:
-  - _self_
-  - data: cvae.yaml
-  - model: convolutional.yaml
-  - callbacks: default.yaml
-  - logger: csv
-  - trainer: default.yaml
-  - paths: default.yaml
-  - extras: default.yaml
-  - hydra: default.yaml
-</code></pre>
-<p>The <code>data</code> parameter points to a yaml file in the <code>configs/data/</code> folder, which in this case is <code>cvae.yaml</code>, a config file for the dataset I primarily work with. The next parameter is <code>model</code>, which similarly directs to a yaml file located in <code>configs/model/</code> associated with a particular machine learning model. As you can see, most of them are set to <code>default.yaml</code>, which is located in each of their respective folders, and includes standard defaults. New configs can be made and if selected here, in <code>train.yaml</code>, they will be used when the model is next trained. <code>eval.yaml</code> works very similarly.</p>
-<p>Beyond selecting these yaml files, there are some extra options which can be changed in the two files, which are all hopefully self-explanatory.</p>
-<h2 id="callbacks"><a class="header" href="#callbacks">Callbacks</a></h2>
-<p>Callbacks are objects that can customize the behavior of the training loop in the PyTorch Trainer, and can be used for things such as as model checkpointing, early stopping, etc. The setup is designed to use callbacks that are <a href="https://lightning.ai/docs/pytorch/latest/extensions/callbacks.html#built-in-callbacks">built-in to Lightning</a>.</p>
-<p>For example, in <code>model_summary.yaml</code>, we use the <code>RichModelSummary</code> object from Lightning.</p>
-<pre><code class="language-yaml">model_summary:
-  _target_: lightning.pytorch.callbacks.RichModelSummary
-  max_depth: 1 # the maximum depth of layer nesting that the summary will include
-</code></pre>
-<p>One can then use this callback as follows:</p>
-<pre><code class="language-bash">python train.py callbacks=model_summary
-</code></pre>
-<p>Or include it in a selection of callbacks, as done in <code>default.yaml</code>, which can then be used to utilise all of them. Ideally configs which contain a <code>default.yaml</code> should be chosen in <code>train.yaml</code></p>
-<h2 id="data"><a class="header" href="#data">Data</a></h2>
-<p>Each yaml file here is used for the loading of a dataset, and includes all the imporant key words one requires for the use of a dataset.</p>
-<p>This is the default <code>CVAE.yaml</code>
-<em>target</em>: src.data.cvae_datamodule.CVAEDataModule
-data_dir: ${paths.data_dir}/CVAE
-batch_size: 16
-train_val_test_split: [10_205, 1_000, 1_000]
-num_workers: 8
-pin_memory: False</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="customising-your-dataset"><a class="header" href="#customising-your-dataset">Customising your dataset</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-models"><a class="header" href="#creating-models">Creating models</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-trainer"><a class="header" href="#the-trainer">The trainer</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="how-to-run"><a class="header" href="#how-to-run">How to run</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="training-your-model"><a class="header" href="#training-your-model">Training your model</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="evalutating-your-model"><a class="header" href="#evalutating-your-model">Evalutating your model</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="running-experiments"><a class="header" href="#running-experiments">Running experiments</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="logging"><a class="header" href="#logging">Logging</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="research"><a class="header" href="#research">Research</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="structure-factors"><a class="header" href="#structure-factors">Structure Factors</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="datasets"><a class="header" href="#datasets">Datasets</a></h1>
+<p>All things research related go here.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dataset-structure"><a class="header" href="#dataset-structure">Dataset Structure</a></h1>
+<pre><code class="language-txt">├── 16                          &lt;- ICSD code
+│   ├── 16_+0+0+0.npy              &lt;- Diffraction iamge as numpy array
+│   ├── 16_+0+0+0.png              &lt;- Diffraction image as png
+│   ├── 16_structure_factors.txt   &lt;- Structure factors for computing electron density
+│   ├── 16_structure.npy           &lt;- Electron density as numpy array
+│   ├── 16_structure.png           &lt;- Electron density as png
+│   ├── 16.cif                     &lt;- File containing crystal information
+│   ├── felix.inp                  &lt;- File containing Felix settings
+│   └── felix.hkl                  &lt;- File for which Felix angles
+│
+├── 25
+.   ├── 25_+0+0+0.npy
+.   .
+.   .
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ms-ssim-loss-function"><a class="header" href="#ms-ssim-loss-function">MS-SSIM Loss Function</a></h1>
+<p>SSIM is a perception-based model that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. The difference with other techniques such as MSE or PSNR is that these approaches estimate absolute errors. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects.</p>
+<h3 id="tests"><a class="header" href="#tests">Tests</a></h3>
+<p>The following configurations and models were used.</p>
+<details>
+<summary>Configuration</summary>
+<pre>
++-- data
+|   `-- _target_: src.data.FDP_npy_1x128x128.FDPDataModule                                   
+|       data_dir: D:\felix-ml/data//FDP                                                      
+|       batch_size: 32                                                                       
+|       train_val_test_split:                                                                
+|       - 9454                                                                               
+|       - 1500                                                                               
+|       - 1500                                                                               
+|       num_workers: 8                                                                       
+|       pin_memory: false                                                                    
+|                                                                                            
++-- model
+|   `-- _target_: src.models.autoencoder.AELitModule                                         
+|       config:                                                                              
+|         embed_dim: 64                                                                      
+|         learning_rate: 0.0001                                                              
+|                                                                                            
++-- callbacks
+|   `-- model_checkpoint:                                                                    
+|         _target_: lightning.pytorch.callbacks.ModelCheckpoint                              
+|         dirpath: D:\felix-ml\logs\train\runs\2023-08-08_20-32-58/checkpoints               
+|         filename: epoch_{epoch:03d}                                                        
+|         monitor: val/loss                                                                  
+|         verbose: false                                                                     
+|         save_last: false                                                                   
+|         save_top_k: -1                                                                     
+|         mode: min                                                                          
+|         auto_insert_metric_name: false                                                     
+|         save_weights_only: false                                                           
+|         every_n_train_steps: null                                                          
+|         train_time_interval: null                                                          
+|         every_n_epochs: 1                                                                  
+|         save_on_train_epoch_end: null                                                      
+|       early_stopping:                                                                      
+|         _target_: lightning.pytorch.callbacks.EarlyStopping                                
+|         monitor: val/loss                                                                  
+|         min_delta: 0.0                                                                     
+|         patience: 100                                                                      
+|         verbose: false                                                                     
+|         mode: min                                                                          
+|         strict: true                                                                       
+|         check_finite: true                                                                 
+|         stopping_threshold: null                                                           
+|         divergence_threshold: null                                                         
+|         check_on_train_epoch_end: null                                                     
+|       model_summary:                                                                       
+|         _target_: lightning.pytorch.callbacks.RichModelSummary                             
+|         max_depth: -1                                                                      
+|       rich_progress_bar:                                                                   
+|         _target_: lightning.pytorch.callbacks.RichProgressBar                              
+|                                                                                            
++-- logger
+|   `-- csv:                                                                                 
+|         _target_: lightning.pytorch.loggers.csv_logs.CSVLogger                             
+|         save_dir: D:\felix-ml\logs\train\runs\2023-08-08_20-32-58                          
+|         name: csv/                                                                         
+|         prefix: ''                                                                         
+|                                                                                            
++-- trainer
+|   `-- _target_: lightning.pytorch.trainer.Trainer                                          
+|       default_root_dir: D:\felix-ml\logs\train\runs\2023-08-08_20-32-58                    
+|       min_epochs: 20                                                                       
+|       max_epochs: 100                                                                      
+|       accelerator: gpu                                                                     
+|       devices: 1                                                                           
+|       check_val_every_n_epoch: 1                                                           
+|       deterministic: false                                                                 
+|                                                                                            
++-- paths
+|   `-- root_dir: D:\felix-ml                                                                
+|       data_dir: D:\felix-ml/data/                                                          
+|       log_dir: D:\felix-ml/logs/                                                           
+|       output_dir: D:\felix-ml\logs\train\runs\2023-08-08_20-32-58                          
+|       work_dir: D:\felix-ml                                                                
+|                                                                                            
++-- extras
+|   `-- ignore_warnings: false                                                               
+|       enforce_tags: true                                                                   
+|       print_config: true                                                                   
+|                                                                                            
++-- task_name
+|   `-- train                                                                                
++-- tags
+|   `-- ['dev']                                                                              
++-- train
+|   `-- True                                                                                 
++-- test
+|   `-- True                                                                                 
++-- compile
+|   `-- False                                                                                
++-- ckpt_path
+|   `-- None                                                                                 
+`-- seed
+    `-- None                                                                                 
+</pre>
+</details>
+<details>
+<summary>Model</summary>
+<pre>
+┌────┬─────────────────┬─────────────────┬────────┐
+│    │ Name            │ Type            │ Params │
+├────┼─────────────────┼─────────────────┼────────┤
+│ 0  │ model           │ Autoencoder     │  3.9 M │
+│ 1  │ model.encoder   │ Encoder         │  1.4 M │
+│ 2  │ model.encoder.0 │ Conv2d          │  3.2 K │
+│ 3  │ model.encoder.1 │ GDN             │ 16.5 K │
+│ 4  │ model.encoder.2 │ Conv2d          │  409 K │
+│ 5  │ model.encoder.3 │ GDN             │ 16.5 K │
+│ 6  │ model.encoder.4 │ Conv2d          │  409 K │
+│ 7  │ model.encoder.5 │ GDN             │ 16.5 K │
+│ 8  │ model.encoder.6 │ Conv2d          │  409 K │
+│ 9  │ model.encoder.7 │ GDN             │ 16.5 K │
+│ 10 │ model.encoder.8 │ Conv2d          │  102 K │
+│ 24 │ model.flatten   │ Flatten         │      0 │
+│ 11 │ model.fc1       │ Linear          │  262 K │
+│ 12 │ model.fc_bn1    │ BatchNorm1d     │  1.0 K │
+│ 13 │ model.fc2       │ Linear          │  262 K │
+│ 14 │ model.fc_bn2    │ BatchNorm1d     │  1.0 K │
+│ 15 │ model.fc3       │ Linear          │ 32.8 K │
+│ 16 │ model.fc_bn3    │ BatchNorm1d     │    128 │
+│ 17 │ model.fc4       │ Linear          │ 33.3 K │
+│ 18 │ model.fc_bn4    │ BatchNorm1d     │  1.0 K │
+│ 19 │ model.fc5       │ Linear          │  262 K │
+│ 20 │ model.fc_bn5    │ BatchNorm1d     │  1.0 K │
+│ 21 │ model.fc6       │ Linear          │  262 K │
+│ 22 │ model.fc_bn6    │ BatchNorm1d     │  1.0 K │
+│ 23 │ model.relu      │ ReLU            │      0 │
+│ 24 │ model.unflatten │ Unflatten       │      0 │
+│ 25 │ model.decoder   │ Decoder         │  1.4 M │
+│ 26 │ model.decoder.0 │ ConvTranspose2d │  102 K │
+│ 27 │ model.decoder.1 │ GDN             │ 16.5 K │
+│ 28 │ model.decoder.2 │ ConvTranspose2d │  409 K │
+│ 29 │ model.decoder.3 │ GDN             │ 16.5 K │
+│ 30 │ model.decoder.4 │ ConvTranspose2d │  409 K │
+│ 31 │ model.decoder.5 │ GDN             │ 16.5 K │
+│ 32 │ model.decoder.6 │ ConvTranspose2d │  409 K │
+│ 33 │ model.decoder.7 │ GDN             │ 16.5 K │
+│ 34 │ model.decoder.8 │ ConvTranspose2d │  3.2 K │
+│ 35 │ model.decoder.9 │ Sigmoid         │      0 │
+│ 36 │ loss_function   │ MS_SSIM_Loss    │      0 │
+│ 37 │ train_loss      │ MeanMetric      │      0 │
+│ 38 │ val_loss        │ MeanMetric      │      0 │
+│ 39 │ test_loss       │ MeanMetric      │      0 │
+└────┴─────────────────┴─────────────────┴────────┘
+</pre>
+</details>
+<p><strong>The MS-SSIM trained model evaluated on 12 random samples at various stages in training.</strong></p>
+<p><img src="./images/MS-SSIM-loss.png" alt="ms-ssim loss" /></p>
+<p>We see that significant structural progress is still being made at high epochs, signifying that &gt;100 will be required until plateaus are reached. This is made more concrete in the figure below.</p>
+<p><strong>Investigating loss over the course of training.</strong></p>
+<p><img src="./images/MS-SSIM-analysis.png" alt="ms-ssim loss" /></p>
+<p>Whilst progress is continually being made on the validation set at high epochs, notice that after epoch 30, we have overfitting occur as the training set sees much greater benefits per epoch. This suggests that the 64 latent dimensions (as seen in the configuration) finally becomes a problem when such an intelligent loss function is used. This is in contrast to what is seen when using BCE and MSE, as they do not encounter the same issues at 64 dimensions.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="contact"><a class="header" href="#contact">Contact</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>type</th><th>author</th><th>title</th></tr></thead><tbody>
+<tr><td>article</td><td>Snell J, Ridgeway K, Liao R et al.</td><td>Learning to Generate Images with Perceptual Similarity Metrics</td></tr>
+<tr><td>github</td><td>Fang Gongfan</td><td>https://github.com/VainF/pytorch-msssim</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="contact"><a class="header" href="#contact">Contact</a></h1>
 <p>Joe Webb <br />
 Student. BSc Mathematics and Physics</p>
 <p>Disordered Quantum Systems (DisQS) <br />

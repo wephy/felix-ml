@@ -1,7 +1,0 @@
-_target_: src.models.ResNetVAE.VAELitModule
-
-config:
-  loss_function:
-    _target_: src.models.util.bce
-  embed_dim: 128
-  learning_rate: 0.0003

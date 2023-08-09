@@ -29,8 +29,8 @@ test-full: ## Run all tests
 train: ## Train the model
 	python src/train.py
 
-vae: ## Train the model
-	python src/train.py experiment=vae
+exp: ## Train the model
+	python src/train.py experiment=test
 
 web:
 	cd docs; mdbook serve --open

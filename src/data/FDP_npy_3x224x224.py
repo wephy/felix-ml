@@ -41,8 +41,10 @@ class FDP(Dataset):
             structure = self.transform(structure)
             pattern = self.transform(pattern)
 
-        return (pattern.expand(3, pattern.size(1), pattern.size(2)),
-                structure.expand(3, structure.size(1), structure.size(2)))
+        return (
+            pattern.expand(3, pattern.size(1), pattern.size(2)),
+            structure.expand(3, structure.size(1), structure.size(2)),
+        )
 
 
 class FDPDataModule(LightningDataModule):
