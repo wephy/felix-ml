@@ -1,8 +1,10 @@
 # Lightning-Hydra-Template
 configs/local/default.yaml
-*.ckpt
 .env
+*.ckpt
 /data/
+
+/bin/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
