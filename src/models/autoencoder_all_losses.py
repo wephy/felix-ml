@@ -11,7 +11,7 @@ from .components import GDN, MS_SSIM_Loss
 
 
 class Encoder(nn.Sequential):
-    def __init__(self, C=32, M=128):
+    def __init__(self, C=16, M=64):
         super().__init__(
             nn.Conv2d(
                 in_channels=1,
@@ -61,7 +61,7 @@ class Encoder(nn.Sequential):
 
 
 class Decoder(nn.Sequential):
-    def __init__(self, C=32, M=128):
+    def __init__(self, C=16, M=64):
         super().__init__(
             nn.ConvTranspose2d(
                 in_channels=C,
@@ -130,22 +130,18 @@ class Autoencoder(nn.Module):
         # Encoding components
         self.encoder = Encoder()
         self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(32 * 4 * 4, 512)
-        self.fc_bn1 = nn.BatchNorm1d(512)
-        self.fc2 = nn.Linear(512, 512)
-        self.fc_bn2 = nn.BatchNorm1d(512)
-        self.fc3 = nn.Linear(512, self.embed_dim)
-        self.fc_bn3 = nn.BatchNorm1d(self.embed_dim)
+        self.fc1 = nn.Linear(16 * 4 * 4, 256)
+        self.fc_bn1 = nn.BatchNorm1d(256)
+        self.fc2 = nn.Linear(256, self.embed_dim)
+        self.fc_bn2 = nn.BatchNorm1d(self.embed_dim)
 
         # Decoding components
-        self.fc4 = nn.Linear(self.embed_dim, 512)
-        self.fc_bn4 = nn.BatchNorm1d(512)
-        self.fc5 = nn.Linear(512, 512)
-        self.fc_bn5 = nn.BatchNorm1d(512)
-        self.fc6 = nn.Linear(512, 32 * 4 * 4)
-        self.fc_bn6 = nn.BatchNorm1d(32 * 4 * 4)
+        self.fc3 = nn.Linear(self.embed_dim, 256)
+        self.fc_bn3 = nn.BatchNorm1d(256)
+        self.fc4 = nn.Linear(256, 16 * 4 * 4)
+        self.fc_bn4 = nn.BatchNorm1d(16 * 4 * 4)
         self.relu = nn.ReLU(inplace=True) 
-        self.unflatten = nn.Unflatten(1, (32, 4, 4))
+        self.unflatten = nn.Unflatten(1, (16, 4, 4))
         self.decoder = Decoder()
 
     def encode(self, x):
@@ -156,14 +152,12 @@ class Autoencoder(nn.Module):
         # Encoding FC layers
         x = self.relu(self.fc_bn1(self.fc1(x)))
         x = self.relu(self.fc_bn2(self.fc2(x)))
-        x = self.relu(self.fc_bn3(self.fc3(x)))
         return x
 
     def decode(self, z):
         # Decoding FC layers
-        x = self.relu(self.fc_bn4(self.fc4(z)))
-        x = self.relu(self.fc_bn5(self.fc5(x)))
-        x = self.relu(self.fc_bn6(self.fc6(x)))
+        x = self.relu(self.fc_bn3(self.fc3(z)))
+        x = self.relu(self.fc_bn4(self.fc4(x)))
 
         # Decoder
         x = self.unflatten(x)
@@ -187,10 +181,10 @@ class AELitModule(LightningModule):
         self.embed_dim = config.embed_dim
 
         self.model = Autoencoder(embed_dim=config.embed_dim)
-        self.loss_function = MS_SSIM_Loss(data_range=1.0, channel=1, win_size=7)
+        self.loss_function = MS_SSIM_Loss(data_range=1.0, channel=1, win_size=5)
         self.MSE = nn.MSELoss()
         self.BCE = nn.BCELoss()
-        
+
         # metric objects for calculating and averaging accuracy across batches
         # self.train_acc = Accuracy(task="binary")
         # self.val_acc = Accuracy(task="binary")
