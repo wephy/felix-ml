@@ -8,8 +8,6 @@ max_epochs: 500
 accelerator: gpu
 devices: 1
 
-profiler: "simple"
-
 # mixed precision for extra speed-up
 # precision: 16
 

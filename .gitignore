@@ -2,7 +2,8 @@
 configs/local/default.yaml
 .env
 *.ckpt
-/data/
+/data/FDP/
+/data/VAE000/
 
 /bin/
 

@@ -1,2 +1,0 @@
-- model.config.embed_dim=32
-- model.config.loss_function._target_=src.models.util.bce

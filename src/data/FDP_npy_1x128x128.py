@@ -5,7 +5,7 @@ import torch
 
 # from skimage import io
 from lightning import LightningDataModule
-from torch.utils.data import DataLoader, Dataset, random_split
+from torch.utils.data import DataLoader, Dataset, random_split, Subset
 from torchvision.transforms import transforms
 import numpy as np
 
@@ -20,10 +20,7 @@ class FDP(Dataset):
         return len(self.ICSD_codes)
 
     def __getitem__(self, idx):
-        if torch.is_tensor(idx):
-            idx = idx.tolist()
-
-        ICSD_code = self.ICSD_codes[idx]
+        ICSD_code = idx
 
         structure = np.load(
             os.path.join(self.data_dir, ICSD_code, ICSD_code + "_structure.npy")
@@ -33,9 +30,6 @@ class FDP(Dataset):
             0.0,
             1.0,
         ).astype(np.float32)
-
-        # structure = torch.from_numpy(structure).float().clone().detach().view(1, 128, 128)
-        # pattern = torch.from_numpy(pattern).float().clone().detach().view(1, 128, 128)
 
         if self.transform:
             structure = self.transform(structure)
@@ -74,7 +68,7 @@ class FDPDataModule(LightningDataModule):
     def __init__(
         self,
         data_dir,
-        train_val_test_split: Tuple[int, int, int],
+        split,
         batch_size: int,
         num_workers: int,
         pin_memory: bool,
@@ -96,6 +90,7 @@ class FDPDataModule(LightningDataModule):
         self.data_val = None
         self.data_test = None
         self.data_dir = data_dir
+        self.split = split
 
     def setup(self, stage: Optional[str] = None):
         """Load data. Set variables: `self.data_train`, `self.data_val`, `self.data_test`.
@@ -106,11 +101,17 @@ class FDPDataModule(LightningDataModule):
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
             dataset = FDP(self.data_dir, transform=self.transforms)
-            self.data_train, self.data_val, self.data_test = random_split(
-                dataset=dataset,
-                lengths=self.hparams.train_val_test_split,
-                generator=torch.Generator().manual_seed(42),
-            )
+            with open(os.path.join(self.split, "train")) as file:
+                self.data_train = Subset(dataset, file.read().split("\n")[:-1])
+            with open(os.path.join(self.split, "val")) as file:
+                self.data_val = Subset(dataset, file.read().split("\n")[:-1])
+            with open(os.path.join(self.split, "test")) as file:
+                self.data_test = Subset(dataset, file.read().split("\n")[:-1])
+            # self.data_train, self.data_val, self.data_test = random_split(
+            #     dataset=dataset,
+            #     lengths=self.hparams.train_val_test_split,
+            #     generator=torch.Generator().manual_seed(42),
+            # )
 
     def train_dataloader(self):
         return DataLoader(

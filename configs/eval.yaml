@@ -3,7 +3,7 @@
 defaults:
   - _self_
   - data: default.yaml # choose datamodule with `test_dataloader()` for evaluation
-  - model: autoencoder_all_losses.yaml
+  - model: autoencoder.yaml
   - logger: csv
   - trainer: default.yaml
   - paths: default.yaml
