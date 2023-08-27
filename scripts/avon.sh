@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:ampere_a100:1
 #SBATCH --partition=gpu
 #SBATCH --time=48:00:00
-#SBATCH --acount=su007-rr-gpu
+#SBATCH --account=su007-rr-gpu
 
 module restore felix-ml
 
