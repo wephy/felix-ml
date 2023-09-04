@@ -1,0 +1,6 @@
+_target_: src.data.FDP_npy_1x128x128.FDPDataModule
+data_dir: //storage/disqs/felix-ML/data/FDP
+split: ${paths.data_dir}/splits/0
+batch_size: 32
+num_workers: 8
+pin_memory: False

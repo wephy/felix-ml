@@ -9,4 +9,4 @@
 
 module restore felix-ml
 
-srun python src/train.py
+srun python src/train.py experiment=disqs.yaml

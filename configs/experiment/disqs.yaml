@@ -4,36 +4,24 @@
 # python train.py experiment=example
 
 defaults:
-  - override /data: FDP_npy.yaml
-  - override /model: cvae.yaml
-  - override /callbacks: default.yaml
-  - override /trainer: default.yaml
+  - override /data: disqs.yaml
+  - override /model: autoencoder.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["cvae"]
-
-seed: 12345
+tags: ["autoencoder"]
 
 trainer:
-  min_epochs: 2
-  max_epochs: 20
+  min_epochs: 800
+  max_epochs: 800
 
 data:
-  data_dir: /storage/disqs/Felix-ML/data
-  batch_size: 32
+  split: ${paths.data_dir}/splits/0
+
+seed: 0
 
 model:
   config:
-    loss_function:
-      _target_: src.models.util.zncc
-      embedding_weight: 0.01
-    latent_dims: 8
-    learning_rate: 0.0002
-
-logger:
-  csv:
-    name: "csv/"
-  aim:
-    experiment: "convolutional"
+    embed_dim: 16
+    learning_rate: 0.00005
