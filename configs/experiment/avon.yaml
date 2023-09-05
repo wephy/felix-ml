@@ -1,0 +1,27 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: default.yaml
+  - override /model: autoencoder.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["autoencoder"]
+
+trainer:
+  min_epochs: 800
+  max_epochs: 800
+
+data:
+  split: ${paths.data_dir}/splits/0
+
+seed: 0
+
+model:
+  config:
+    embed_dim: 16
+    learning_rate: 0.00005
