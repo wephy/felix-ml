@@ -5,7 +5,7 @@
 #SBATCH --mem-per-cpu=3850
 #SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
-#SBATCH --time=48:00:00
+#SBATCH --time=32:00:00
 
 module restore felix-ml
 
