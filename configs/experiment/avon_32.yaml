@@ -23,5 +23,5 @@ seed: 0
 
 model:
   config:
-    embed_dim: 24
+    embed_dim: 32
     learning_rate: 0.00005
