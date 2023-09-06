@@ -1,4 +1,4 @@
-_target_: src.models.autoencoder.AELitModule
+_target_: src.models.autoencoder_C128_M128.AELitModule
 
 config:
   embed_dim: 24

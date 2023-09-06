@@ -17,9 +17,14 @@ trainer:
   max_epochs: 800
 
 data:
-  split: ${paths.data_dir}/splits/0
+  split: ${paths.data_dir}/splits/1
 
-seed: 0
+seed: 1
+
+hydra:
+  run:
+    dir:
+      ${paths.log_dir}/${task_name}/24_C128_M128
 
 model:
   config:

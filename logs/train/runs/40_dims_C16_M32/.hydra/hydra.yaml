@@ -119,11 +119,12 @@ hydra:
   overrides:
     hydra:
     - hydra.mode=RUN
-    task: []
+    task:
+    - experiment=avon_40
   job:
     name: train
     chdir: null
-    override_dirname: ''
+    override_dirname: experiment=avon_40
     id: ???
     num: ???
     config_name: train.yaml
@@ -137,12 +138,12 @@ hydra:
   runtime:
     version: 1.3.2
     version_base: '1.3'
-    cwd: D:\felix-ml
+    cwd: /gpfs/home/physics/phusnq/felix-ml
     config_sources:
     - path: hydra.conf
       schema: pkg
       provider: hydra
-    - path: D:\felix-ml\configs
+    - path: /gpfs/home/physics/phusnq/felix-ml/configs
       schema: file
       provider: main
     - path: hydra_plugins.hydra_colorlog.conf
@@ -151,19 +152,19 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: D:\felix-ml\logs\train\runs\2023-08-24_14-43-57
+    output_dir: /gpfs/home/physics/phusnq/felix-ml/logs/train/runs/2023-09-05_15-52-33
     choices:
       debug: null
       local: default.yaml
       hparams_search: null
-      experiment: null
+      experiment: avon_40
       hydra: default.yaml
       extras: default.yaml
       paths: default.yaml
       trainer: default.yaml
       logger: csv
       callbacks: default.yaml
-      model: autoencoder_all_losses.yaml
+      model: autoencoder.yaml
       data: default.yaml
       hydra/env: default
       hydra/callbacks: null

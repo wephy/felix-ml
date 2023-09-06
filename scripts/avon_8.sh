@@ -9,4 +9,4 @@
 
 module restore felix-ml
 
-srun python src/train.py experiment=avon_32
+srun python src/train.py experiment=avon_8

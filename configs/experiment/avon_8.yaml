@@ -24,9 +24,9 @@ seed: 1
 hydra:
   run:
     dir:
-      ${paths.log_dir}/${task_name}/40_C128_M128
+      ${paths.log_dir}/${task_name}/8_C128_M128
 
 model:
   config:
-    embed_dim: 40
+    embed_dim: 8
     learning_rate: 0.00005

@@ -12,13 +12,13 @@ model_checkpoint:
   mode: "min"
   save_last: False
   auto_insert_metric_name: False
-  every_n_epochs: 1
+  every_n_epochs: 10
   save_top_k: -1  # -1 means no checkpoints are deleted
 
 early_stopping:
   monitor: "val/loss_MS_SSIM"
-  patience: 100
-  mode: "min" 
+  # patience: 100
+  # mode: "min" 
   # min_delta: 0.01 # minimum change in the monitored quantity to qualify as an improvement
 
 model_summary:

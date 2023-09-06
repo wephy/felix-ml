@@ -1,29 +1,25 @@
 model:
-  _target_: src.models.autoencoder_all_losses.AELitModule
+  _target_: src.models.autoencoder.AELitModule
   config:
-    embed_dim: 16
+    embed_dim: 32
     learning_rate: 5.0e-05
-model/params/total: 304208
-model/params/trainable: 304208
+model/params/total: 312448
+model/params/trainable: 312448
 model/params/non_trainable: 0
 data:
   _target_: src.data.FDP_npy_1x128x128.FDPDataModule
   data_dir: ${paths.data_dir}/FDP
+  split: ${paths.data_dir}/splits/0
   batch_size: 32
-  train_val_test_split:
-  - 9454
-  - 1500
-  - 1500
   num_workers: 8
   pin_memory: false
 trainer:
   _target_: lightning.pytorch.trainer.Trainer
   default_root_dir: ${paths.output_dir}
-  min_epochs: 500
-  max_epochs: 500
+  min_epochs: 800
+  max_epochs: 800
   accelerator: gpu
   devices: 1
-  profiler: simple
   check_val_every_n_epoch: 1
   deterministic: false
 callbacks:
@@ -65,6 +61,6 @@ extras:
   print_config: true
 task_name: train
 tags:
-- dev
+- autoencoder
 ckpt_path: null
-seed: null
+seed: 0
