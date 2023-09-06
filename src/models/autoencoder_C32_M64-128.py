@@ -120,15 +120,15 @@ class Autoencoder(nn.Module):
         # Encoding components
         self.encoder = Encoder()
         self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(32 * 4 * 4, 128)
-        self.fc_bn1 = nn.BatchNorm1d(128)
-        self.fc2 = nn.Linear(128, self.embed_dim)
+        self.fc1 = nn.Linear(32 * 4 * 4, 1024)
+        self.fc_bn1 = nn.BatchNorm1d(1024)
+        self.fc2 = nn.Linear(1024, self.embed_dim)
         self.fc_bn2 = nn.BatchNorm1d(self.embed_dim)
 
         # Decoding components
-        self.fc3 = nn.Linear(self.embed_dim, 128)
-        self.fc_bn3 = nn.BatchNorm1d(128)
-        self.fc4 = nn.Linear(128, 32 * 4 * 4)
+        self.fc3 = nn.Linear(self.embed_dim, 1024)
+        self.fc_bn3 = nn.BatchNorm1d(1024)
+        self.fc4 = nn.Linear(1024, 32 * 4 * 4)
         self.fc_bn4 = nn.BatchNorm1d(32 * 4 * 4)
         self.unflatten = nn.Unflatten(1, (32, 4, 4))
         self.decoder = Decoder()

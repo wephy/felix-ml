@@ -26,7 +26,7 @@ seed: 1
 hydra:
   run:
     dir:
-      ${paths.log_dir}/${task_name}/24_C32_M64-128_F_-4_3_m
+      ${paths.log_dir}/24_C32_M64-128_F_-4_3_m
 
 model:
   config:
