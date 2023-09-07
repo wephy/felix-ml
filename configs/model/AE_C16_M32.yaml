@@ -1,0 +1,5 @@
+_target_: src.models.autoencoder_C16_M32.AELitModule
+
+config:
+  embed_dim: 24
+  learning_rate: 0.00005

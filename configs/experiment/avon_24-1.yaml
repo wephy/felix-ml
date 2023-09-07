@@ -5,7 +5,7 @@
 
 defaults:
   - override /data: default.yaml
-  - override /model: autoencoder.yaml
+  - override /model: AE_C16_M32.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
@@ -15,6 +15,8 @@ tags: ["autoencoder"]
 trainer:
   min_epochs: 800
   max_epochs: 800
+  accelerator: cpu
+  devices: 42
 
 data:
   split: ${paths.data_dir}/splits/1
@@ -24,9 +26,9 @@ seed: 1
 hydra:
   run:
     dir:
-      ${paths.log_dir}/${task_name}/40_C32_M64-128
+      ${paths.log_dir}/24_1
 
 model:
   config:
-    embed_dim: 40
+    embed_dim: 24
     learning_rate: 0.00005
