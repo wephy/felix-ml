@@ -1,0 +1,78 @@
+task_name: train
+tags:
+- autoencoder
+train: true
+test: true
+compile: false
+ckpt_path: null
+seed: 0
+data:
+  _target_: src.data.FDP_npy_1x128x128.FDPDataModule
+  data_dir: ${paths.data_dir}/FDP
+  split: ${paths.data_dir}/splits/0
+  batch_size: 32
+  num_workers: 8
+  pin_memory: false
+model:
+  _target_: src.models.autoencoder.AELitModule
+  config:
+    embed_dim: 24
+    learning_rate: 5.0e-05
+callbacks:
+  model_checkpoint:
+    _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: epoch_{epoch:03d}
+    monitor: val/loss_MS_SSIM
+    verbose: false
+    save_last: false
+    save_top_k: -1
+    mode: min
+    auto_insert_metric_name: false
+    save_weights_only: false
+    every_n_train_steps: null
+    train_time_interval: null
+    every_n_epochs: 1
+    save_on_train_epoch_end: null
+  early_stopping:
+    _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: val/loss_MS_SSIM
+    min_delta: 0.0
+    patience: 100
+    verbose: false
+    mode: min
+    strict: true
+    check_finite: true
+    stopping_threshold: null
+    divergence_threshold: null
+    check_on_train_epoch_end: null
+  model_summary:
+    _target_: lightning.pytorch.callbacks.RichModelSummary
+    max_depth: -1
+  rich_progress_bar:
+    _target_: lightning.pytorch.callbacks.RichProgressBar
+logger:
+  csv:
+    _target_: lightning.pytorch.loggers.csv_logs.CSVLogger
+    save_dir: ${paths.output_dir}
+    name: csv/
+    prefix: ''
+trainer:
+  _target_: lightning.pytorch.trainer.Trainer
+  default_root_dir: ${paths.output_dir}
+  min_epochs: 800
+  max_epochs: 800
+  accelerator: gpu
+  devices: 1
+  check_val_every_n_epoch: 1
+  deterministic: false
+paths:
+  root_dir: ${oc.env:PROJECT_ROOT}
+  data_dir: ${paths.root_dir}/data/
+  log_dir: ${paths.root_dir}/logs/
+  output_dir: ${hydra:runtime.output_dir}
+  work_dir: ${hydra:runtime.cwd}
+extras:
+  ignore_warnings: false
+  enforce_tags: true
+  print_config: true

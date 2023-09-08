@@ -10,7 +10,7 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["I_-4_3_d"]
+tags: ["P_-4_3_n"]
 
 trainer:
   min_epochs: 800
@@ -19,14 +19,14 @@ trainer:
   devices: 42
 
 data:
-  split: ${paths.data_dir}/splits/I_-4_3_d
+  split: ${paths.data_dir}/splits/P_-4_3_n
 
 seed: 1
 
 hydra:
   run:
     dir:
-      ${paths.log_dir}/I_-4_3_d
+      ${paths.log_dir}/P_-4_3_n
 
 model:
   config:
